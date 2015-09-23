@@ -1,0 +1,17 @@
+#!/bin/sh
+
+TEXNAME=$1.tex
+
+#compilation version etudiante
+sed '/setboolean{sol}/ s/true/false/' $TEXNAME > etudiant.tex
+latex etudiant.tex
+latex etudiant.tex
+dvips etudiant.dvi -o etudiant.ps
+ps2pdf etudiant.ps $1_etu.pdf
+
+#compilation version enseignant
+sed '/setboolean{sol}/ s/false/true/' $TEXNAME > enseignant.tex
+latex enseignant.tex
+latex etudiant.tex
+dvips enseignant.dvi -o enseignant.ps
+ps2pdf enseignant.ps $1_ens.pdf
