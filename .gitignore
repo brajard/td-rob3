@@ -124,3 +124,11 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
+
+# otherfiles
+*.ps
+*.pdf
+*~
+*.tmp
+enseignant.tex
+etudiant.tex
