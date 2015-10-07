@@ -1,0 +1,208 @@
+\documentclass[french,12pt,a4paper,twoside,openright,titlepage]{report}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[latin1]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{babel}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{ifthen}
+\usepackage{xcomment}
+\usepackage{array}
+\usepackage{rotating}
+
+\textwidth17cm
+\textheight25cm
+%\oddsidemargin-1cm
+%\parskip0.2pt
+\voffset-2cm
+\hoffset-1cm
+\headsep0.5cm
+\topmargin0.5cm
+\oddsidemargin0.5cm
+\evensidemargin0.5cm
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\newlength{\mylength}
+\newcounter{exo}\stepcounter{exo}
+
+\newcommand\exercice[1]{
+\subsubsection*{Exercice \theexo\stepcounter{exo} {#1}}
+%{\bf Exercice \theexo\stepcounter{exo}\\}
+}
+
+
+
+\RequirePackage{layout,color}
+
+\definecolor{gray50}{gray}{.5}
+\definecolor{gray40}{gray}{.6}
+\definecolor{gray30}{gray}{.7}
+\definecolor{gray20}{gray}{.8}
+\definecolor{gray10}{gray}{.9}
+\definecolor{gray05}{gray}{.95}
+
+\newsavebox{\laboiboite}
+\newlength{\longdelaboiboite}
+\newlength{\deptdelaboiboite}
+\newlength{\hautdelaboiboite}
+\newcolumntype{R}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }r<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{C}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }c<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{L}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }l<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+
+\newcolumntype{S}{>{\begin{lrbox}{\laboiboite}}r<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{D}{>{\begin{lrbox}{\laboiboite}}c<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{M}{>{\begin{lrbox}{\laboiboite}}l<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newlength\Linewidth
+\def\findlength{\setlength\Linewidth\linewidth
+\addtolength\Linewidth{-4\fboxrule}
+\addtolength\Linewidth{-3\fboxsep}
+}
+\newenvironment{examplebox}{\par\begingroup%
+   \setlength{\fboxsep}{5pt}\findlength%
+   \setbox0=\vbox\bgroup\noindent%
+   \hsize=\Linewidth%
+   \begin{minipage}{\Linewidth}\small}%
+    {\end{minipage}\egroup%
+    \vspace{6pt}%
+    \noindent\textcolor{gray20}{\fboxsep2.5pt\fbox%
+     {\fboxsep5pt\colorbox{gray05}{\normalcolor\box0}}}%
+    \endgroup\par\addvspace{6pt minus 3pt}\noindent%
+    \normalcolor\ignorespacesafterend}
+\let\Examplebox\examplebox
+\let\endExamplebox\endexamplebox
+
+\widowpenalty 10000
+\clubpenalty 10000
+\raggedbottom
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newboolean{sol}
+\setboolean{sol}{false}
+%\setboolean{sol}{false}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
+\ifthenelse{\boolean{sol}}
+{
+\newenvironment{solution}
+{
+\begin{examplebox}
+\begin{center}
+\begin{tabular}{m{0.5cm}|m{15cm}|}\cline{2-2}
+%\begin{turn}{90}{Solution}\end{turn}&
+\rotatebox{90}{Solution}&
+\begin{minipage}[H]{\linewidth}
+\vspace{0.2cm}
+}
+{
+\vspace{0.2cm}
+\end{minipage}
+\\\cline{2-2}
+\end{tabular}
+\end{center}
+\end{examplebox}
+}
+}
+{
+\newxcomment[]{solution}
+}
+
+
+\begin{document}
+
+\lhead[ROB3 ]{ROB3 }
+\chead[]{}
+\rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
+ 
+\ifthenelse{\boolean{sol}}
+{
+\lfoot[Polytech'Paris-UPMC 2014-2015 (version enseignants)]{Polytech'Paris-UPMC 2014-2015 (version enseignants)}
+
+}
+{
+\lfoot[Polytech'Paris-UPMC 2014-2015 (version \'etudiants)]{Polytech'Paris-UPMC 2014-2015 (version \'etudiants)}
+}
+
+\cfoot[]{}
+\rfoot[\thepage]{\thepage}
+
+
+
+
+\pagestyle{fancyplain}
+%%%%%%%%%%%%
+
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+ %\chapter{Conception d'algorithmes}
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+
+\chapter*{Travaux Pratiques n° 3}
+
+
+\exercice{}
+
+Ecrire le programme permettant d'initialiser un tableau de taille N (N est une \textbf{constante} définie par l'instruction \verb|#define|) avec des entiers aléatoires compris entre 1 et P (P est un entier défini par l'utilisateur, ou, par la suite, initialisé dans le programme).
+
+\exercice{- Suppression des doublons}
+
+
+Dans la suite du programme précédant, écrire une procédure permettant de ne garder que la première occurence de chaque entier. Les autres occurences seront remplacées par 0.
+
+Exemple : le tableau \verb|{1,2,1,9,4,2,1,9}| deviendra \verb|{1,2,0,9,4,0,0,0}|
+
+\exercice{}
+Ecrire un programme permettant de générer un tableau d'entiers \verb|T| de taille N dans l'ordre croissant. Le premier élément du tableau est un entier aléatoire compris entre 1 et 10. Chaque autre élément d'indice \verb|i| du tableau est défini par la relation de récurrence \verb|T[i]=T[i-1]+r| avec \verb|r| un entier aléatoire compris entre 0 et P (On prendra P assez petit, 2 ou 3).
+
+\exercice{}
+Réécrire le programme de l'exercice \textit{Suppression des doublons} avec le tableau trié généré précédemment. Vous devez modifier le programme de façon à ce qu'il ne parcours qu'une seule fois votre tableau (une seule boucle). Il faut vous servir du fait que le tableau est maintenant trié.
+
+\exercice{}
+Ecrire un programme qui prend en entrée un tableau d'entiers \verb|T|, et deux entiers \verb|i| et \verb|j| et qui échange les éléments du tableau d'indice \verb|i| et \verb|j|.
+
+\exercice{}
+Cet exercice consiste à mélanger les éléments d'un tableau trié. On pourra utiliser le tableau trié généré dans l'exercice précédent.
+La procédure de mélange (appelé algorithme de Fisher-Yates) consiste à parcourir le tableau \verb|T| et, pour chaque indice \verb|i|, à échanger l'élément \verb|T[i]| avec un élément tiré au hasard situé après (c'est à dire dont l'indice \verb|j| est tel que \verb|j>i|).
+
+\exercice {- Correcteur}
+Ecrire un programme qui génère un tableau d'entiers de taille N composés uniquement de 0 et de 1. Les N-1 premiers éléments du tableau sont tirés au hasard et le dernier élément est la somme des N-1 premier modulo 2.
+
+Ce procédé très simple permet de détecter certaines erreurs de transmission. Si on veut transmettre une série de N-1 bits, on transmet (ce qui est peu coûteux en mémoire) N bits en ajoutant le bit de parité (défini précédemment). Le recepteur de la série peut ainsi vérifier si la transmission n'a pas introduit d'erreur. Bien entendu certaines erreurs de transmissions se compensent et cette méthode ne détecte pas toutes les erreurs possibles.
+
+
+
+\end{document}
