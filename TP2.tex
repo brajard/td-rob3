@@ -13,6 +13,9 @@
 \usepackage{xcomment}
 \usepackage{array}
 \usepackage{rotating}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
 
 \textwidth17cm
 \textheight25cm
@@ -108,6 +111,27 @@ $\displaystyle }l<{$\end{lrbox}%
 \clubpenalty 10000
 \raggedbottom
 
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{language=C,
+ breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                
+commentstyle=\color{mygreen},
+keywordstyle=\color{blue},
+numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=8pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2 }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -151,11 +175,11 @@ $\displaystyle }l<{$\end{lrbox}%
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2014-2015 (version enseignants)]{Polytech'Paris-UPMC 2014-2015 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2015-2016 (version enseignants)]{Polytech'Paris-UPMC 2015-2016 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2014-2015 (version \'etudiants)]{Polytech'Paris-UPMC 2014-2015 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2015-2016 (version \'etudiants)]{Polytech'Paris-UPMC 2015-2016 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -171,12 +195,16 @@ $\displaystyle }l<{$\end{lrbox}%
  %\chapter{Conception d'algorithmes}
  %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
 
-\chapter*{Travaux Pratiques n° 3}
+\chapter*{Travaux Pratiques n° 2}
 
 
 \exercice{}
 
 Ecrire le programme permettant d'initialiser un tableau de taille N (N est une \textbf{constante} définie par l'instruction \verb|#define|) avec des entiers aléatoires compris entre 1 et P (P est un entier défini par l'utilisateur, ou, par la suite, initialisé dans le programme).
+
+\begin{solution}
+\lstinputlisting{tp3_exo1.c}
+\end{solution}
 
 \exercice{- Suppression des doublons}
 
@@ -185,24 +213,92 @@ Dans la suite du programme précédant, écrire une procédure permettant de ne gard
 
 Exemple : le tableau \verb|{1,2,1,9,4,2,1,9}| deviendra \verb|{1,2,0,9,4,0,0,0}|
 
+
+\begin{solution}
+\lstinputlisting{tp3_exo2.c}
+\end{solution}
+
+
 \exercice{}
 Ecrire un programme permettant de générer un tableau d'entiers \verb|T| de taille N dans l'ordre croissant. Le premier élément du tableau est un entier aléatoire compris entre 1 et 10. Chaque autre élément d'indice \verb|i| du tableau est défini par la relation de récurrence \verb|T[i]=T[i-1]+r| avec \verb|r| un entier aléatoire compris entre 0 et P (On prendra P assez petit, 2 ou 3).
+
+
+\begin{solution}
+\lstinputlisting{tp3_exo3.c}
+\end{solution}
+
 
 \exercice{}
 Réécrire le programme de l'exercice \textit{Suppression des doublons} avec le tableau trié généré précédemment. Vous devez modifier le programme de façon à ce qu'il ne parcours qu'une seule fois votre tableau (une seule boucle). Il faut vous servir du fait que le tableau est maintenant trié.
 
+
+
+\begin{solution}
+\lstinputlisting{tp3_exo4.c}
+\end{solution}
+
 \exercice{}
 Ecrire un programme qui prend en entrée un tableau d'entiers \verb|T|, et deux entiers \verb|i| et \verb|j| et qui échange les éléments du tableau d'indice \verb|i| et \verb|j|.
+
+
+\begin{solution}
+\lstinputlisting{tp3_exo5.c}
+\end{solution}
 
 \exercice{}
 Cet exercice consiste à mélanger les éléments d'un tableau trié. On pourra utiliser le tableau trié généré dans l'exercice précédent.
 La procédure de mélange (appelé algorithme de Fisher-Yates) consiste à parcourir le tableau \verb|T| et, pour chaque indice \verb|i|, à échanger l'élément \verb|T[i]| avec un élément tiré au hasard situé après (c'est à dire dont l'indice \verb|j| est tel que \verb|j>i|).
 
+\begin{solution}
+\lstinputlisting{tp3_exo6.c}
+\end{solution}
 \exercice {- Correcteur}
 Ecrire un programme qui génère un tableau d'entiers de taille N composés uniquement de 0 et de 1. Les N-1 premiers éléments du tableau sont tirés au hasard et le dernier élément est la somme des N-1 premier modulo 2.
 
 Ce procédé très simple permet de détecter certaines erreurs de transmission. Si on veut transmettre une série de N-1 bits, on transmet (ce qui est peu coûteux en mémoire) N bits en ajoutant le bit de parité (défini précédemment). Le recepteur de la série peut ainsi vérifier si la transmission n'a pas introduit d'erreur. Bien entendu certaines erreurs de transmissions se compensent et cette méthode ne détecte pas toutes les erreurs possibles.
 
 
+
+\begin{solution}
+\lstinputlisting{tp3_exo7.c}
+\end{solution}
+
+\exercice{- Bataille navale simple}
+
+On veut écrire un programme qui simule le jeu de la bataille navale 
+pour un seul joueur
+(dans un cas simple où les bateaux sont tous de longueur 1).
+Le programme doit :
+\begin{enumerate}
+\item Attribuer 11 points au joueur (il devra en conserver suffisamment).\\
+\item Fabriquer une grille  $4\times4$ et choisir au hasard 5 cases de cette grille
+pour l'emplacement des bateaux. En pratique on créera un tableau $4\times4$ dont tous les coefficients
+sont nuls sauf ceux correspondant aux bateaux qui vaudront 1. Dans le cours du jeu, les coefficents correspondants
+aux cases
+ayant subit un tir vaudront 2 (et ainsi les coefficients correspondant aux cases ayant subit un tir sur un bateau
+vaudront 3).\\
+\item Afficher au début une grille vierge (On affichera autant de caractères \verb|' '| que de cases du tableau.\\
+\item Procéder au tir en :\\
+\begin{itemize}
+\item Demandant au joueur les coordonnées de son tir ;\\
+\item Vérifiant si la case correspondante contient un bateau ;\\
+\item Affichant la nouvelle grille avec un \verb|'o'| dans la case choisie si celle-ci
+contient un bateau et un \verb|'x'| dans le cas contraire;\\
+\item Retirant un point au joueur si son tir a fait plouf ;\\
+\end{itemize}
+\item Recommencer l'opération précédente tant que tous les bâteaux n'ont pas été découverts ou tant 
+que le score n'est pas tombé à zéro.\\
+\item Afficher finalement le score du joueur.\\
+\end{enumerate}
+Pour cet exercice, n'hésitez pas à améliorer votre programme de toutes les façons qui vous paraîtraient intéressantes (
+Affichage des coordonnées sur la grille, rappel du score à chaque étape, bâteaux de taille supérieures, ...)
+
+\begin{solution}
+\lstinputlisting[lastline=30]{tp3_exo8.c}
+\end{solution}
+
+\begin{solution}
+\lstinputlisting[firstline=31]{tp3_exo8.c}
+\end{solution}
 
 \end{document}
