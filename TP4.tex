@@ -1,0 +1,331 @@
+\documentclass[french,12pt,a4paper,twoside,openright,titlepage]{report}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[latin1]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{babel}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+%\usepackage{here}
+\usepackage{ifthen}
+\usepackage{xcomment}
+\usepackage{array}
+\usepackage{rotating}
+
+\textwidth17cm
+\textheight25cm
+%\oddsidemargin-1cm
+%\parskip0.2pt
+\voffset-2cm
+\hoffset-1cm
+\headsep0.5cm
+\topmargin0.5cm
+\oddsidemargin0.5cm
+\evensidemargin0.5cm
+\DefineShortVerb{\|}
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\newlength{\mylength}
+\newcounter{exo}\stepcounter{exo}
+\newcommand\exercice[1]{
+\subsubsection*{Exercice \theexo\stepcounter{exo} {#1}}
+%{\bf Exercice \theexo\stepcounter{exo}\\}
+}
+
+
+\RequirePackage{layout,color}
+
+\definecolor{gray50}{gray}{.5}
+\definecolor{gray40}{gray}{.6}
+\definecolor{gray30}{gray}{.7}
+\definecolor{gray20}{gray}{.8}
+\definecolor{gray10}{gray}{.9}
+\definecolor{gray05}{gray}{.95}
+
+\newsavebox{\laboiboite}
+\newlength{\longdelaboiboite}
+\newlength{\deptdelaboiboite}
+\newlength{\hautdelaboiboite}
+\newcolumntype{R}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }r<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{C}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }c<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{L}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }l<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+
+\newcolumntype{S}{>{\begin{lrbox}{\laboiboite}}r<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{D}{>{\begin{lrbox}{\laboiboite}}c<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{M}{>{\begin{lrbox}{\laboiboite}}l<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newlength\Linewidth
+\def\findlength{\setlength\Linewidth\linewidth
+\addtolength\Linewidth{-4\fboxrule}
+\addtolength\Linewidth{-3\fboxsep}
+}
+\newenvironment{examplebox}{\par\begingroup%
+   \setlength{\fboxsep}{5pt}\findlength%
+   \setbox0=\vbox\bgroup\noindent%
+   \hsize=\Linewidth%
+   \begin{minipage}{\Linewidth}\small}%
+    {\end{minipage}\egroup%
+    \vspace{6pt}%
+    \noindent\textcolor{gray20}{\fboxsep2.5pt\fbox%
+     {\fboxsep5pt\colorbox{gray05}{\normalcolor\box0}}}%
+    \endgroup\par\addvspace{6pt minus 3pt}\noindent%
+    \normalcolor\ignorespacesafterend}
+\let\Examplebox\examplebox
+\let\endExamplebox\endexamplebox
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newboolean{sol}
+%\setboolean{sol}{true}
+\setboolean{sol}{false}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
+\ifthenelse{\boolean{sol}}
+{
+\newenvironment{solution}
+{
+\begin{examplebox}
+\begin{center}
+\begin{tabular}{m{0.5cm}|m{15cm}|}\cline{2-2}
+%\begin{turn}{90}{Solution}\end{turn}&
+\rotatebox{90}{Solution}&
+\begin{minipage}[H]{\linewidth}
+\vspace{0.2cm}
+}
+{
+\vspace{0.2cm}
+\end{minipage}
+\\\cline{2-2}
+\end{tabular}
+\end{center}
+\end{examplebox}
+}
+}
+{
+\newxcomment[]{solution}
+}
+
+
+\begin{document}
+
+\lhead[ROB3]{ROB3}
+\chead[]{}
+\rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
+ 
+\ifthenelse{\boolean{sol}}
+{
+\lfoot[Polytech'Paris-UPMC 2014-2015 (version enseignants)]{Polytech'Paris-UPMC 2014-2015 (version enseignants)}
+
+}
+{
+\lfoot[Polytech'Paris-UPMC 2014-2015 (version \'etudiants)]{Polytech'Paris-UPMC 2014-2015 (version \'etudiants)}
+}
+
+\cfoot[]{}
+\rfoot[\thepage]{\thepage}
+
+
+
+
+\pagestyle{fancyplain}
+%%%%%%%%%%%%
+
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+ %\chapter{Conception d'algorithmes}
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+
+\chapter*{Travaux Pratiques n°4}
+
+L'ensemble des exercices de ce TP pourra être réalisé dans un même fichier \texttt{.c}.
+
+\exercice{}
+
+Ecrire et tester une fonction \texttt{void affiche\_tab(int tab[], int n)} qui affiche à l'écran les n premiers éléments du tableau d'entiers \texttt{tab}. Si le tableau est de taille \texttt{n}, la fonction affichera l'ensemble des éléments de \texttt{tab}.
+
+\begin {solution}
+\begin {verbatim}
+void affiche_tab(int tab[],int n) {
+  int i;
+  for (i=0;i<n;i++) {
+     printf("%4d ",tab[i]);
+     }
+  printf("\n");
+}
+\end{verbatim}
+\end{solution}
+
+\exercice{}
+
+Ecrire et tester une fonction \texttt{void init\_tab(int max, int tab[], int n)} qui initialise les n premiers éléments du tableau d'entiers \texttt{tab} à des valeurs aléatoires comprises entre \texttt{0} et \texttt{max-1}. Si le tableau est de taille \texttt{n}, la fonction initialisera l'ensemble des éléments de \texttt{tab}. 
+
+\exercice {}
+Ecrire une fonction \verb|void ech(int tab[],int i, int j)| qui échange l'élément d'indice i et l'élément d'indice j dans le tableau \verb|tab|.
+
+
+\exercice{(Tri par sélection)}
+
+Ecrire un programme C qui implémente l'algorithme de tri par sélection vu en TD. On définit N le nombre d'éléments du tableau à trier comme une constante.
+
+
+\begin{solution}
+\begin{verbatim}
+for (i = 0; i < N - 1; i++) {
+
+            minIndex = i;
+
+            for (j = i + 1; j < N; j++)
+
+                  if (arr[j] < arr[minIndex])
+
+                        minIndex = j;
+
+            if (minIndex != i) {
+
+                  tmp = arr[i];
+
+                  arr[i] = arr[minIndex];
+
+                  arr[minIndex] = tmp;
+
+            }
+
+      }
+\end{verbatim}
+
+\end{solution}
+
+
+\exercice{(Tri à bulle)}
+
+Ecrire un programme C qui implémente l'algorithme de tri à bulle. On définit N le nombre d'éléments du tableau à trier comme une constante.
+
+Le principe du tri à bulle est de comparer successivement tous les éléments adjacents d'un tableau (en commençant par le premier) et de les échanger si 
+l'élément d'indice $i$ est supérieur à l'élément d'indice $i+1$. On recommence cette opération tant que tous les éléments ne sont pas triés.
+
+\begin{solution}
+\begin{verbatim}
+
+while (echange) {
+
+            echange = 0;
+
+            j++;
+
+            for ( i = 0; i < N - j; i++) {
+
+                  if (arr[i] > arr[i + 1]) {
+
+                        tmp = arr[i];
+
+                        arr[i] = arr[i + 1];
+
+                        arr[i + 1] = tmp;
+
+                        echange = 1;
+
+                  }
+
+            }
+
+      }
+\end{verbatim}
+
+\end{solution}
+
+
+\exercice{(Tri par insertion)}
+
+Ecrire un programme C qui implémente l'algorithme de tri par insertion. On définit N le nombre d'éléments du tableau à trier comme une constante.
+
+Le tri par insertion consiste à prendre l'élément se trouvant juste après la partie 
+déjà triée du tableau et de trouver sa place dans cette dernière (insertion). Le premier élément 
+à insérer est le deuxième élément du tableau, le premier étant forcément déjà  trié puisqu'il 
+est tout seul. On recommence ce procédé jusqu'au dernier élément du tableau.
+\begin{solution}
+\end{solution}
+
+
+\exercice{(Comparaison des méthodes de tri implémentées)}
+
+
+
+On va ensuite exécuter chacun des algorithmes de tri sur un tableau et comparer le temps mis par chacun des algorithmes de tri précédents. 
+
+Pour donner une idée, on prendra un tableau de taille 50000 contenant des entiers entre 0 et 20000. On pourra ensuite faire varier la taille des tableaux pour voir l'évolution du temps pris par les algorithmes en fonction de la taille.
+
+On pourra alors tracer un graphique du temps en fonction de la taille N. Quelle courbe obtient-on ?
+
+Pour mesurer le temps (en secondes) d'exécution d'une séquence d'instruction, on utilise la bibliothèque \texttt{time.h}. On déclare une variable \texttt{p} de type \texttt{double} et deux variables \texttt{start} et \texttt{end} de type \texttt{clock\_t} :
+\begin{verbatim}
+double p;
+clock_t start, end ;
+\end{verbatim}
+ on début et à la fin de la séquence d'instruction (ici séquence permettant de trier le tableau), on consulte l'horloge de l'ordinateur :
+\begin{verbatim}
+start=clock();
+//Début de la séquence d'instruction
+(...)
+//Fin de la séquence d'instruction
+end=clock();
+\end{verbatim}
+
+On calcule et affiche la différence en secondes :
+
+\begin{verbatim}
+p=(double) (end - start) / CLOCKS_PER_SEC ;
+printf("Le temps d'execution est : %lf secondes\n",p);
+\end{verbatim}
+
+\textbf{Attention :} Afin que l'estimation du temps de chaque tri soit significative, il convient de faire la moyenne sur plusieurs tris pour chacune des méthodes, et de trier toujours le même tableau lorsqu'on compare deux méthodes.
+
+\begin{solution}
+Voici, pour donner un ordre d'idée des temps des tris les uns par
+rapport aux autres, les résulats des tris sur un tableau de taille
+N=50000 contenant des entiers entre 1 et MAX=200000.
+
+Le temps d'execution de tri a bulle est : 10.170000 secondes
+
+Le temps d'execution de tri par selection est : 3.730000 secondes
+
+Le temps d'execution de tri par insertion est : 4.290000 secondes
+
+Le temps d'execution du tri par shell est : 0.020000
+
+\end{solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
