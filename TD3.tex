@@ -1,0 +1,364 @@
+\documentclass[french,12pt,a4paper,twoside,openright,titlepage]{report}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[latin1]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{babel}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+%\usepackage{here}
+\usepackage{ifthen}
+\usepackage{xcomment}
+\usepackage{array}
+\usepackage{rotating}
+
+\textwidth17cm
+\textheight25cm
+%\oddsidemargin-1cm
+%\parskip0.2pt
+\voffset-2cm
+\hoffset-1cm
+\headsep0.5cm
+\topmargin0.5cm
+\oddsidemargin0.5cm
+\evensidemargin0.5cm
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\newlength{\mylength}
+\newcounter{exo}\stepcounter{exo}
+\newcommand\exercice[1]{
+\subsubsection*{Exercice \theexo\stepcounter{exo} {#1}}
+%{\bf Exercice \theexo\stepcounter{exo}\\}
+}
+
+
+\RequirePackage{layout,color}
+
+\definecolor{gray50}{gray}{.5}
+\definecolor{gray40}{gray}{.6}
+\definecolor{gray30}{gray}{.7}
+\definecolor{gray20}{gray}{.8}
+\definecolor{gray10}{gray}{.9}
+\definecolor{gray05}{gray}{.95}
+
+\newsavebox{\laboiboite}
+\newlength{\longdelaboiboite}
+\newlength{\deptdelaboiboite}
+\newlength{\hautdelaboiboite}
+\newcolumntype{R}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }r<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{C}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }c<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{L}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }l<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+
+\newcolumntype{S}{>{\begin{lrbox}{\laboiboite}}r<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{D}{>{\begin{lrbox}{\laboiboite}}c<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{M}{>{\begin{lrbox}{\laboiboite}}l<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newlength\Linewidth
+\def\findlength{\setlength\Linewidth\linewidth
+\addtolength\Linewidth{-4\fboxrule}
+\addtolength\Linewidth{-3\fboxsep}
+}
+\newenvironment{examplebox}{\par\begingroup%
+   \setlength{\fboxsep}{5pt}\findlength%
+   \setbox0=\vbox\bgroup\noindent%
+   \hsize=\Linewidth%
+   \begin{minipage}{\Linewidth}\small}%
+    {\end{minipage}\egroup%
+    \vspace{6pt}%
+    \noindent\textcolor{gray20}{\fboxsep2.5pt\fbox%
+     {\fboxsep5pt\colorbox{gray05}{\normalcolor\box0}}}%
+    \endgroup\par\addvspace{6pt minus 3pt}\noindent%
+    \normalcolor\ignorespacesafterend}
+\let\Examplebox\examplebox
+\let\endExamplebox\endexamplebox
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newboolean{sol}
+%\setboolean{sol}{true}
+\setboolean{sol}{false}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
+\ifthenelse{\boolean{sol}}
+{
+\newenvironment{solution}
+{
+\begin{examplebox}
+\begin{center}
+\begin{tabular}{m{0.5cm}|m{15cm}|}\cline{2-2}
+%\begin{turn}{90}{Solution}\end{turn}&
+\rotatebox{90}{Solution}&
+\begin{minipage}[H]{\linewidth}
+\vspace{0.2cm}
+}
+{
+\vspace{0.2cm}
+\end{minipage}
+\\\cline{2-2}
+\end{tabular}
+\end{center}
+\end{examplebox}
+}
+}
+{
+\newxcomment[]{solution}
+}
+
+
+\begin{document}
+
+\lhead[ROB3 ]{ROB3 }
+\chead[]{}
+\rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
+ 
+\ifthenelse{\boolean{sol}}
+{
+\lfoot[Polytech'Paris-UPMC 2015-2016 (version enseignants)]{Polytech'Paris-UPMC 2015-2016 (version enseignants)}
+
+}
+{
+\lfoot[Polytech'Paris-UPMC 2015-2016 (version \'etudiants)]{Polytech'Paris-UPMC 2015-2016 (version \'etudiants)}
+}
+
+\cfoot[]{}
+\rfoot[\thepage]{\thepage}
+
+
+
+
+\pagestyle{fancyplain}
+%%%%%%%%%%%%
+
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+ %\chapter{Conception d'algorithmes}
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+
+\chapter*{Travaux Dirigés n°3}
+
+\exercice {} 
+Ecrire l'algorithme qui compte le nombre de déplacements effectués par
+la tête de lecture/écriture d'une
+machine de Turing avant qu'elle ne s'arrête. On considère une machine
+de Turing à 5 états de 0 à 4 et un état particulier -1 qui arrête la
+machine.
+La machine peut lire ou écrire uniquement des 0 ou des 1 sur le ruban.
+On modélise la machine de
+Turing de la façon suivante
+\begin{itemize}
+\item Un tableau d'entiers \texttt{ruban} de taille 100 qui représente le ruban
+  (normalement infini). \texttt{ruban} sera
+  initialisé avec que des zéros.\\
+\item Un entier \texttt{pos} représentant la position du curseur sur le
+tableau \texttt{ruban}. \texttt{pos} sera initialisé à $50$.\\
+\item Un entier \texttt{cstate} représentant l'état courant de la
+  machine. \texttt{cstate} sera initalisé à 0.
+\item Un tableau d'entiers \texttt{write0} (resp. \texttt{write1}) de taille 5
+  qui donne la valeur à écrire sur le ruban de la machine dans le cas
+  où on lit un 0 (resp. 1). Par exemple, si la machine lit un 0 sur le
+  ruban, et que son état courant est 3, alors on effectue l'affectation
+  suivante : \texttt{ruban[pos]=write1[3];}. Notez que les tableaux
+  \texttt{write0} et \texttt{write1} ne contiennent que des 0 ou des 1.\\
+\item Un tableau d'entiers \texttt{depl0} (resp. \texttt{depl1}) de
+  taille 5 qui donne le déplacement de la tête de lecture avec -1 pour
+  un déplacement vers la gauche et +1 pour un déplacement vers la
+  droite. Par exemple, si la machine lit un 1 sur le ruban et que son
+  état courant est 4, alors, la position de la tête de lecture est
+  modifiée de la façon suivante : \texttt{pos=pos+depl1[4]}.\\
+\item Un tableau d'entiers  \texttt{nextstate0} (resp.  \texttt{nextstate1)} de taille 5 qui donne
+  la valeur du prochain état de la machine dans le cas où on lit un 0
+  (resp. 1). Par exemple, si la machine lit un 1 sur le ruban et que
+  son état courant est 2, alors, le prochain état sera l'entier
+  contenu dans  \texttt{nextstate1[2]} (\texttt{cstate=nexstate1[2]}). Attention, il y a un élément du tableau
+  \texttt{nextstate0} ou \texttt{nextstate1} qui est égal à -1 qui
+  arrête la machine.\\
+\end{itemize}
+Pour tester l'algorithme, on prendra la machine de Turing suivante :
+\begin{itemize}
+\item \texttt{write0=\{1,1,1,1,1\}}
+\item \texttt{write1=\{0,1,0,0,0\}}
+\item \texttt{depl0=\{1,1,1,1,-1\}}
+\item \texttt{depl1=\{-1,-1,-1,-1,1\}}
+\item \texttt{nextstate0=\{1,2,3,4,3\}}
+\item \texttt{nextstate1=\{-1,0,1,2,4\}}
+\end{itemize}
+
+\begin{solution}
+%\begin{algorithm}[h!]
+%\caption{D\'etermination d'un nombre d'occurences d'un entier dans une saisie}
+%\label{algo_cm}
+\begin{algorithmic}[1]
+\REQUIRE{write0,write1,depl0,depl1,nexstate0,nexstate1 : tableaux d'entiers}
+\ENSURE{compte : entier, nombre de déplacement}
+\\
+{\bf Donn\'ees locales : } pos,cstate : entiers ; ruban[] : tableau d'entiers
+\\
+\STATE pos $\leftarrow 50$
+\STATE cstate $\leftarrow 0$
+\STATE compte $\leftarrow 0$
+\STATE Initialise ruban avec des zéros
+\WHILE{cstate $\neq -1$}
+\IF{ruban[pos] $=0$}
+\STATE ruban[pos] $\leftarrow$ write0[cstate]
+\STATE pos $\leftarrow$ pos + depl0[cstate]
+\STATE cstate $\leftarrow$ nextstate0[cstate]
+\ELSE
+\STATE ruban[pos] $\leftarrow$ write1[cstate]
+\STATE pos $\leftarrow$ pos + depl1[cstate]
+\STATE cstate $\leftarrow$ nextstate1[cstate]
+\ENDIF
+\STATE compte=compte+1
+\ENDWHILE
+\end{algorithmic}
+%\end{algorithm}
+\end{solution}
+
+\exercice{- factoriel}
+Ecrire 2 algorithmes permettant de calculer $n!$. L'un des algorithmes sera itératif et l'autre récursif.
+
+\exercice {- suite de Fibonacci}
+La suite de Fibonacci est définie de manière récursive par la relation : $u_n = u_{n-1} + u_{n-2}$.\\
+et par les conditions initiales : $u_0=u_1=1$.\\
+Construire un algorithme récursif permettant de calculer le n-ième terme.
+
+\begin{solution}
+\begin{verbatim}
+#include <stdio.h>
+
+int fibonacci(int);
+
+int main() {
+  int result, number;
+  printf("inserisci un numero: ");
+  scanf("%d", &number);
+  result = fibonacci(number);
+  printf("fibonacci(%d) = %d\n", number, result);
+  return 0;
+}
+
+int fibonacci(int n)
+{
+  if (n == 0 || n==1)
+    return n;
+  else return (fibonacci(n-1) + fibonacci(n-2));
+}
+\end{verbatim}
+\end{solution}
+
+
+\exercice {- Puissance k-ième récursive }
+Pour calculer $n^k$ ($n$,$k$, entiers positifs), on peut utiliser le principe de récursion suivant:
+\begin{itemize}
+\item si $k=0$ alors, le résultat est 1.
+\item si $k=2 \times p$ (k est pair), alors on calcule (selon le même principe) $m=n^p$ puis le résultat est $m \times m$.
+\item si $k=2 \times p + 1$ (k est impair), alors on calcule (selon le même principe) $m=n^p$ puis le résultat est $n \times m \times m$.
+\end{itemize}
+
+\begin{enumerate}
+\item Ecrire l'algorithme récursif \verb|puiss| qui prend en entrée deux entiers positifs $n$ et $k$ et renvoie $n^k$ selon le principe décrit ci-dessus.
+\item Dans le cas du calcul de $n^{18}$ (n positif), combien d'appels seront fait à l'algorithme \verb|puiss| ?
+\item Dans le calcul de $n^k$ avec $k=2^p$, combien d'appels seront fait à l'algotithme \verb|puiss| (la réponse dépend bien sûr de p).
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item Voici la fonction (codé en C)
+\begin{verbatim}
+int puiss(int n, int k) {
+  int m; 
+  int rep=1;
+  if (k==0) return(1);
+  else {
+    m=puiss(n,k/2);
+    if (k%2==1) rep=n;
+    return(rep*m*m);
+  }
+}
+\end{verbatim}
+
+\item  Voici la liste des appels à la fonction \verb|puiss| : \verb|puiss(n,18)| appelle \verb|puiss(n,9)| qui appelle \verb|puiss(n,4)| qui appelle \verb|puiss(n,2)|  qui appelle \verb|puiss(n,1)| qui apelle \verb|puiss(n,0)|. Au total : 6 appels.
+
+\item Pour calculer $n^k$ avec $k=2^p$. La fonction \verb|puiss(n,k)| apelle \verb|puiss(n,k')| avec $k'=2^p/2=2^{p-1}$. Le p se décrémente de 1 à chaque appel jusqu'à appel avec $k=2^0=1$. Il y a donc au total p+1 appels. (Pour p=1, on appelle 2 fois la fonction et ensuite on fait un appel supplémentaire à chaque fois que p est incrémenté de 1).
+\end{enumerate}
+\end{solution}
+
+
+\exercice{}
+
+Le problème des tours de Hanoï est un jeu de réflexion imaginé par le mathématicien français Édouard Lucas, et consistant à déplacer des disques de diamètres différents d'une tour de « départ » à une tour d'« arrivée » en passant par une tour « intermédiaire » et ceci en un minimum de coups, tout en respectant les règles suivantes :
+\begin{itemize}
+    \item on ne peut déplacer plus d'un disque à la fois,
+    \item  on ne peut placer un disque que sur un autre disque plus grand que lui ou sur un emplacement vide.
+\end{itemize}
+On suppose que cette dernière règle est également respectée dans la configuration de départ.
+On suppose que les trois positions des trois tours sont numérotées 1, 2 et 3.
+
+Ecrire un algorithme qui prend en entrée $n$ le nombre de disque sur
+la tour, $dep$ la position de la tour de départ, $med$ la position de
+la tour intermédiaire, et $fin$ la position finale. Cet algorithme ne renvoie rien mais  affiche les déplacement successifs sous forme d'un couple d'entier $(a,b)$ qui signifie qu'on déplace le disque au dessus de la tour $a$ sur la tour $b$.
+
+Exemple : les mouvements nécessaires pour déplacer 3 disques de $1$ vers $3$ en passant par $2$ :
+\begin{itemize}
+\item (1,3)
+\item (1,2)
+\item (3,2)
+\item (1,3)
+\item (2,1)
+\item (2,3)
+\item (1,3)
+\end{itemize}
+
+\begin{solution}
+\begin{verbatim}
+void deplace(int n, int dep,int med,int fin)
+{
+if (n==1) printf("(%d,%d)\n",dep,fin);
+if (n>1) {
+	deplace (n-1,dep,fin,med);
+	printf("(%d,%d)\n",dep,fin);
+	deplace (n-1,med,dep,fin);
+	 }
+}
+
+\end{verbatim}
+
+\end{solution}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
