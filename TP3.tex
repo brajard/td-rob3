@@ -147,11 +147,11 @@ $\displaystyle }l<{$\end{lrbox}%
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2014-2015 (version enseignants)]{Polytech'Paris-UPMC 2014-2015 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2015-2016 (version enseignants)]{Polytech'Paris-UPMC 2015-2016 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2014-2015 (version \'etudiants)]{Polytech'Paris-UPMC 2014-2015 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2015-2016 (version \'etudiants)]{Polytech'Paris-UPMC 2015-2016 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -167,7 +167,7 @@ $\displaystyle }l<{$\end{lrbox}%
  %\chapter{Conception d'algorithmes}
  %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
 
-\chapter*{Travaux Pratiques n°4}
+\chapter*{Travaux Pratiques n°3}
 
 L'ensemble des exercices de ce TP pourra être réalisé dans un même fichier \texttt{.c}.
 
@@ -197,7 +197,7 @@ Ecrire une fonction \verb|void ech(int tab[],int i, int j)| qui échange l'élémen
 
 \exercice{(Tri par sélection)}
 
-Ecrire un programme C qui implémente l'algorithme de tri par sélection vu en TD. On définit N le nombre d'éléments du tableau à trier comme une constante.
+Ecrire et tester une fonction C  \texttt{void tri\_selec(int tab[], int n)} qui implémente l'algorithme de tri par sélection vu en TD. \verb|n| représente le nombre d'éléments à trier.
 
 
 \begin{solution}
@@ -230,7 +230,7 @@ for (i = 0; i < N - 1; i++) {
 
 \exercice{(Tri à bulle)}
 
-Ecrire un programme C qui implémente l'algorithme de tri à bulle. On définit N le nombre d'éléments du tableau à trier comme une constante.
+Ecrire une fonction C  \texttt{void tri\_bulle(int tab[], int n)}qui implémente l'algorithme de tri à bulle.  \verb|n| représente le nombre d'éléments à trier.
 
 Le principe du tri à bulle est de comparer successivement tous les éléments adjacents d'un tableau (en commençant par le premier) et de les échanger si 
 l'élément d'indice $i$ est supérieur à l'élément d'indice $i+1$. On recommence cette opération tant que tous les éléments ne sont pas triés.
@@ -267,16 +267,38 @@ while (echange) {
 
 
 \exercice{(Tri par insertion)}
-
-Ecrire un programme C qui implémente l'algorithme de tri par insertion. On définit N le nombre d'éléments du tableau à trier comme une constante.
+Ecrire une fonction C  \texttt{void tri\_bulle(int tab[], int n)}qui implémente l'algorithme de tri par insertion.  \verb|n| représente le nombre d'éléments à trier.
 
 Le tri par insertion consiste à prendre l'élément se trouvant juste après la partie 
 déjà triée du tableau et de trouver sa place dans cette dernière (insertion). Le premier élément 
 à insérer est le deuxième élément du tableau, le premier étant forcément déjà  trié puisqu'il 
 est tout seul. On recommence ce procédé jusqu'au dernier élément du tableau.
 \begin{solution}
+\begin{verbatim}
+void tri_insert(int tab[],int n) {
+  int p;
+  int j;
+  int k;
+  for (j=1;j<n;j++) {
+    p=tab[j];
+    k=j-1;
+    while(k>=0 && tab[k]>p)
+      {
+	tab[k+1]=tab[k];
+	k--;
+      }
+      tab[k+1]=p;
+
+  }
+}
+\end{verbatim}
+
 \end{solution}
 
+\exercice{(Duplication de tableaux)}
+Ecrire un programme C  \texttt{void copy\_tab(int tabin[], int tabout[], int n)} qui copie les \verb|n| premières
+valeurs
+du tableau \verb|tabin| dans le tableau \verb|tabout|.
 
 \exercice{(Comparaison des méthodes de tri implémentées)}
 
@@ -293,7 +315,7 @@ Pour mesurer le temps (en secondes) d'exécution d'une séquence d'instruction, on
 double p;
 clock_t start, end ;
 \end{verbatim}
- on début et à la fin de la séquence d'instruction (ici séquence permettant de trier le tableau), on consulte l'horloge de l'ordinateur :
+ Au début et à la fin de la séquence d'instruction (ici séquence permettant de trier le tableau), on consulte l'horloge de l'ordinateur :
 \begin{verbatim}
 start=clock();
 //Début de la séquence d'instruction
@@ -322,7 +344,7 @@ Le temps d'execution de tri par selection est : 3.730000 secondes
 
 Le temps d'execution de tri par insertion est : 4.290000 secondes
 
-Le temps d'execution du tri par shell est : 0.020000
+%Le temps d'execution du tri par shell est : 0.020000
 
 \end{solution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
