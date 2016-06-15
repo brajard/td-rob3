@@ -171,7 +171,7 @@ $\displaystyle }l<{$\end{lrbox}%
  %\chapter{Conception d'algorithmes}
  %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
 
-\chapter*{Travaux Pratiques n°4}
+\chapter*{Travaux Pratiques n°3}
 
 \exercice {}
 
@@ -213,10 +213,26 @@ int main(void)
 \end{verbatim}
 \end{solution}
 
+<<<<<<< HEAD:TP4.tex
 \exercice{Problème "Couicable".}
 \begin{enumerate}
 \item Ecrire une fonction {\tt nbDeChiffres(x)} qui retourne le nombre de 
 chiffres composant un entier $x$ transmis en arguments
+=======
+\exercice{}
+
+Ecrire et tester une fonction \texttt{void init\_tab(int max, int tab[], int n)} qui initialise les n premiers éléments du tableau d'entiers \texttt{tab} à des valeurs aléatoires comprises entre \texttt{0} et \texttt{max-1}. Si le tableau est de taille \texttt{n}, la fonction initialisera l'ensemble des éléments de \texttt{tab}. 
+
+\exercice {}
+Ecrire une fonction \verb|void ech(int tab[],int i, int j)| qui échange l'élément d'indice i et l'élément d'indice j dans le tableau \verb|tab|.
+
+
+\exercice{(Tri par sélection)}
+
+Ecrire et tester une fonction C  \texttt{void tri\_selec(int tab[], int n)} qui implémente l'algorithme de tri par sélection vu en TD. \verb|n| représente le nombre d'éléments à trier.
+
+
+>>>>>>> 91b186a62cd629e3363f2edee3173a77f26825f0:TP3.tex
 \begin{solution}
 \begin{verbatim}
 int nbDeChiffres(int x){
@@ -234,11 +250,21 @@ int nbDeChiffres(int x){
 \end{verbatim}
 \end{solution}
 
+<<<<<<< HEAD:TP4.tex
 \item Ecrire une fonction {\tt extraitNombre(x,n,lg)} qui extrait de $x$ entier positif, à 
 partir du nième chiffre en partant de la droite, le nombre composé de $lg$ 
 chiffres. Elle renvoie -1 si les entrées ne sont pas correctes.\\
 Exemple 1, {\tt extraitNombre(45863047,4,3)} renvoie 586.\\
 Exemple 2, {\tt extraitNombre(45863047,6,4)} renvoie -1.\\
+=======
+
+\exercice{(Tri à bulle)}
+
+Ecrire une fonction C  \texttt{void tri\_bulle(int tab[], int n)}qui implémente l'algorithme de tri à bulle.  \verb|n| représente le nombre d'éléments à trier.
+
+Le principe du tri à bulle est de comparer successivement tous les éléments adjacents d'un tableau (en commençant par le premier) et de les échanger si 
+l'élément d'indice $i$ est supérieur à l'élément d'indice $i+1$. On recommence cette opération tant que tous les éléments ne sont pas triés.
+>>>>>>> 91b186a62cd629e3363f2edee3173a77f26825f0:TP3.tex
 
 \begin{solution}
 {\scriptsize
@@ -270,6 +296,7 @@ int extraitNombre(int x, int n, int lg){
 }
 \end{solution}
 
+<<<<<<< HEAD:TP4.tex
 \item Ecrire une fonction {\tt estPair(x)} qui renvoie 1 si le nombre de chiffres de $x$ est pair, 0 sinon.
 \begin{solution}
 \begin{verbatim}
@@ -279,13 +306,56 @@ int estPair(x){
    else return 0;
 }
 \end{verbatim}
+=======
+
+\exercice{(Tri par insertion)}
+Ecrire une fonction C  \texttt{void tri\_bulle(int tab[], int n)}qui implémente l'algorithme de tri par insertion.  \verb|n| représente le nombre d'éléments à trier.
+
+Le tri par insertion consiste à prendre l'élément se trouvant juste après la partie 
+déjà triée du tableau et de trouver sa place dans cette dernière (insertion). Le premier élément 
+à insérer est le deuxième élément du tableau, le premier étant forcément déjà  trié puisqu'il 
+est tout seul. On recommence ce procédé jusqu'au dernier élément du tableau.
+\begin{solution}
+\begin{verbatim}
+void tri_insert(int tab[],int n) {
+  int p;
+  int j;
+  int k;
+  for (j=1;j<n;j++) {
+    p=tab[j];
+    k=j-1;
+    while(k>=0 && tab[k]>p)
+      {
+	tab[k+1]=tab[k];
+	k--;
+      }
+      tab[k+1]=p;
+
+  }
+}
+\end{verbatim}
+
+>>>>>>> 91b186a62cd629e3363f2edee3173a77f26825f0:TP3.tex
 \end{solution}
 
+\exercice{(Duplication de tableaux)}
+Ecrire un programme C  \texttt{void copy\_tab(int tabin[], int tabout[], int n)} qui copie les \verb|n| premières
+valeurs
+du tableau \verb|tabin| dans le tableau \verb|tabout|.
 
 
+<<<<<<< HEAD:TP4.tex
 \item Ecrire une fonction {\tt sommeDesChiffres(x)} qui renvoie la somme des 
 chiffres composant le nombre $x$ transmis en arguments
 \begin{solution}
+=======
+Pour mesurer le temps (en secondes) d'exécution d'une séquence d'instruction, on utilise la bibliothèque \texttt{time.h}. On déclare une variable \texttt{p} de type \texttt{double} et deux variables \texttt{start} et \texttt{end} de type \texttt{clock\_t} :
+\begin{verbatim}
+double p;
+clock_t start, end ;
+\end{verbatim}
+ Au début et à la fin de la séquence d'instruction (ici séquence permettant de trier le tableau), on consulte l'horloge de l'ordinateur :
+>>>>>>> 91b186a62cd629e3363f2edee3173a77f26825f0:TP3.tex
 \begin{verbatim}
 int sommeDesChiffres(int x){
    int somme=0;
@@ -373,6 +443,7 @@ Exemple : les mouvements nécessaires pour déplacer 3 disques de $1$ vers $3$ en 
 \item (1,3)
 \end{itemize}
 
+<<<<<<< HEAD:TP4.tex
 \begin{solution}
 \begin{verbatim}
 void deplace(int n, int dep,int med,int fin)
@@ -384,6 +455,9 @@ if (n>1) {
 	deplace (n-1,med,dep,fin);
 	 }
 }
+=======
+%Le temps d'execution du tri par shell est : 0.020000
+>>>>>>> 91b186a62cd629e3363f2edee3173a77f26825f0:TP3.tex
 
 \end{verbatim}
 \end{solution}

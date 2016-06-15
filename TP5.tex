@@ -1,0 +1,472 @@
+\documentclass[french,12pt,a4paper,twoside,openright,titlepage]{report}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[latin1]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{babel}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+%\usepackage{here}
+\usepackage{ifthen}
+\usepackage{xcomment}
+\usepackage{array}
+\usepackage{rotating}
+
+\textwidth17cm
+\textheight25cm
+%\oddsidemargin-1cm
+%\parskip0.2pt
+\voffset-2cm
+\hoffset-1cm
+\headsep0.5cm
+
+\topmargin0.5cm
+\oddsidemargin0.5cm
+\evensidemargin0.5cm
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\newlength{\mylength}
+\newcounter{exo}\stepcounter{exo}
+\newcommand\exercice{
+\subsubsection*{Exercice \theexo\stepcounter{exo}}
+%{\bf Exercice \theexo\stepcounter{exo}\\}
+}
+
+
+
+\RequirePackage{layout,color}
+
+\definecolor{gray50}{gray}{.5}
+\definecolor{gray40}{gray}{.6}
+\definecolor{gray30}{gray}{.7}
+\definecolor{gray20}{gray}{.8}
+\definecolor{gray10}{gray}{.9}
+\definecolor{gray05}{gray}{.95}
+
+\newsavebox{\laboiboite}
+\newlength{\longdelaboiboite}
+\newlength{\deptdelaboiboite}
+\newlength{\hautdelaboiboite}
+\newcolumntype{R}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }r<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{C}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }c<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{L}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }l<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+
+\newcolumntype{S}{>{\begin{lrbox}{\laboiboite}}r<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{D}{>{\begin{lrbox}{\laboiboite}}c<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{M}{>{\begin{lrbox}{\laboiboite}}l<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newlength\Linewidth
+\def\findlength{\setlength\Linewidth\linewidth
+\addtolength\Linewidth{-4\fboxrule}
+\addtolength\Linewidth{-3\fboxsep}
+}
+\newenvironment{examplebox}{\par\begingroup%
+   \setlength{\fboxsep}{5pt}\findlength%
+   \setbox0=\vbox\bgroup\noindent%
+   \hsize=\Linewidth%
+   \begin{minipage}{\Linewidth}\small}%
+    {\end{minipage}\egroup%
+    \vspace{6pt}%
+    \noindent\textcolor{gray20}{\fboxsep2.5pt\fbox%
+     {\fboxsep5pt\colorbox{gray05}{\normalcolor\box0}}}%
+    \endgroup\par\addvspace{6pt minus 3pt}\noindent%
+    \normalcolor\ignorespacesafterend}
+\let\Examplebox\examplebox
+\let\endExamplebox\endexamplebox
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newboolean{sol}
+\setboolean{sol}{true}
+%\setboolean{sol}{false}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
+\ifthenelse{\boolean{sol}}
+{
+\newenvironment{solution}
+{
+\begin{examplebox}
+\begin{center}
+\begin{tabular}{m{0.5cm}|m{15cm}|}\cline{2-2}
+%\begin{turn}{90}{Solution}\end{turn}&
+\rotatebox{90}{Solution}&
+\begin{minipage}[H]{\linewidth}
+\vspace{0.2cm}
+}
+{
+\vspace{0.2cm}
+\end{minipage}
+\\\cline{2-2}
+\end{tabular}
+\end{center}
+\end{examplebox}
+}
+}
+{
+\newxcomment[]{solution}
+}
+
+
+\begin{document}
+
+\lhead[ROB3]{ROB3}
+\chead[]{}
+\rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
+ 
+\ifthenelse{\boolean{sol}}
+{
+\lfoot[Polytech'Paris-UPMC 2015-2016 (version enseignants)]{Polytech'Paris-UPMC 2015-2016 (version enseignants)}
+
+}
+{
+\lfoot[Polytech'Paris-UPMC 2015-2016 (version \'etudiants)]{Polytech'Paris-UPMC 2015-2016 (version \'etudiants)}
+}
+
+\cfoot[]{}
+\rfoot[\thepage]{\thepage}
+
+\pagestyle{fancyplain} 
+%%%%%%%%%%%%
+
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+ %\chapter{Conception d'algorithmes}
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+
+\chapter*{Travaux Pratiques n°5}
+
+\section*{Pointeurs}
+
+\exercice
+
+Ecrire une fonction incremente qui prend 3 paramètres en entrée (\textbf{a}, \textbf{b} et \textbf{i}), et qui ajoute à 
+\textbf{a} et \textbf{b} la valeur \textbf{i}. Cette fonction retourne la valeur 1 si \textbf{i} vaut 0, 0 sinon. 
+
+\begin{solution}
+\begin{verbatim}
+#include <stdio.h> 
+
+int incremente (int *a, int *b, int i) { 
+  *a += i; 
+  *b += i; 
+  if (i) 
+    return 0; 
+  return 1; 
+} 
+
+int main (void){ 
+  int p1, p2, i, retour; 
+  printf("valeur du premier parametre ? "); 
+  scanf("%d", &p1); 
+  printf("valeur du second parametre ? "); 
+  scanf("%d", &p2); 
+  printf("increment ? "); 
+  scanf("%d", &i); 
+  printf("Avant appel : param1 = %d, param2 = %d, increment = %d\n", p1, p2, i); 
+  retour = incremente(&p1, &p2, i); 
+  printf("Apres appel : param1 = %d, param2 = %d, increment = %d\n", p1, p2, i); 
+  printf("retour de lÕappel = %d\n", retour); 
+  return 0; 
+} 
+\end{verbatim}
+\end{solution}
+
+
+
+\exercice
+
+Ecrire le code C permettant de créer un tableau \textbf{tab} de 17 entiers en utilisant un pointeur et la fonction malloc. 
+Libérer ensuite la mémoire allouée au tableau avec la fonction free.
+
+
+
+\begin{solution}
+\begin{verbatim}
+#include <stdio.h> 
+#include <stdlib.h> 
+
+int main(void) { 
+  int * tab; 
+  
+  tab = (int *) malloc(17 * sizeof(int)); 
+
+  free(tab); 
+  
+  return 0; 
+} 
+
+
+\end{verbatim}
+\end{solution}
+
+
+
+\exercice
+
+Ecrire le code C permettant de créer un tableau \textbf{tab} à deux dimensions de 15 lignes et 17 colonnes entiers en utilisant un pointeur et la fonction malloc.
+Libérer ensuite la mémoire allouée au tableau avec la fonction free.
+
+
+
+\begin{solution}
+\begin{verbatim}
+#include <stdio.h> 
+#include <stdlib.h> 
+
+int main(void) 
+{ 
+  int ** tab; 
+  int i; 
+  
+  tab = (int **) malloc(15 * sizeof(int *)); 
+  for (i = 0; i < 15; i++) { 
+    tab[i] = (int *) malloc(17 * sizeof(int)); 
+  }
+ 
+  for (i = 0; i < 15; i++) { 
+    free(tab[i]); 
+  } 
+  free(tab); 
+  
+  return 0; 
+} 
+
+\end{verbatim}
+\end{solution}
+
+
+\section*{Tableaux et Matrices}
+
+
+ \exercice
+\begin{itemize}
+\item Ecrire une fonction qui demande à l'utilisateur le nombre de lignes et de 
+colonnes d'une matrices d'entiers, puis remplit la matrice en demandant les 
+valeurs à l'utilisateur.
+
+\item Ecrire une fonction {\tt affiche\_mat(m,l,c)} qui permet d'afficher une 
+matrice m de {\tt l} lignes et {\tt c} colonnes.
+\end{itemize}
+
+\begin{solution}
+\begin{verbatim}
+int **saisir()
+{
+	int i, j, lig, col, **m;
+
+	printf("Entrer le nb de lignes et de colonnes\n");
+   scanf("%d %d",&lig,&col);
+	for(i=0;i<lig;i++)
+		for(j=0;j<col;j++)
+		{
+			printf("Entrer l'element M(%d,%d) : ",i,j);
+			scanf("%d",&m[i][j]);
+		}
+   return m;
+}
+
+afficher(int **mat, int col, int lig)
+{
+	int i, j;
+
+	for(i=0;i<lig;i++)
+	{
+		for(j=0;j<col;j++)
+			printf("%d ",mat[i][j]);
+		printf("\n");
+	}
+}
+\end{verbatim}
+\end{solution}
+
+\exercice
+
+ Ecrire une fonction permettant de multiplier deux matrices. On n'oubliera 
+pas de
+traiter les cas d'erreur.
+
+
+\begin{solution}
+{\scriptsize
+\begin{verbatim}
+
+
+
+multiplication(int **mat1, int col1, int lig1, int **mat2, int col2, int lig2,
+int **mat_res){
+   int i, j, k, s;
+
+   if((col1 == lig2) && (lig1 == col2))
+      for(i=0;i<lig1;i++)
+         for(j=0;j<col2;j++){
+            s = 0;
+            for(k=0;k<col1;k++)
+               s = s + mat1[i][k] * mat2[k][j];
+            mat_res[i][j] = s;
+         }
+   else{
+      printf("erreur les deux matrices n'ont pas les bonnes tailles\n");
+      exit(0);
+   }
+}
+
+\end{verbatim}
+}
+\end{solution}
+
+\newpage
+\exercice
+Le but de cet exercice est de calculer le déterminant d'une matrice carrée $n \times n$.
+\begin{enumerate}
+\item Programmer une fonction qui prends une matrice carrée ($n>1$) en entrée et deux entiers $i$ et $j$ et qui renvoie la même matrice privée de la ligne $i$ et de la colonne $j$.
+\item Programmer la fonction \texttt{det} en utilisant la formule suivante : 
+\begin{equation}
+det(M)=\sum_{i=1}^{n}(m_{ij} \times Cof_{i,j})
+\end{equation}
+dans laquelle $m_{ij}$ est le terme de ligne $i$ et de colonne $j$ de la matrice $M$, et $Cof_{i,j}$ est égal à $-1^{i+j}$ multiplié par le déterminant de la matrice $M$ privée de la ligne $i$ et de la colonne $j$.
+
+On notera que le déterminant d'une matrice M de taille $1 \times 1$ est égale à la valeur contenue dans la matrice.
+\end{enumerate}
+
+\begin{solution}
+
+Le code de cette solution est très moche (désolé), mais il fonctionne et contient les fonctionnalité utiles. la fonction \texttt{m1} calcule $-1^{i+j}$.
+Pour info, le déterminant de la matrice écrite dans la solution est 152.
+
+\begin{verbatim}
+#include <stdlib.h>
+#include <stdio.h>
+void affiche(float **M,int n)
+{
+  int i,j;
+  for (i=0;i<n;i++) {
+    for(j=0;j<n;j++) {
+      printf("%f\t",M[i][j]);
+    }
+    printf("\n");
+  }
+}
+float ** init (int n)
+{
+  int i; 
+  float **M;
+  M=(float **)malloc(n*sizeof(float));
+  for (i=0;i<n;i++)
+    {
+      M[i]=(float *)malloc(n*sizeof(float));
+    }
+  return M;
+}
+int m1 (int i,int j)
+{
+  if ((i+j) % 2 == 0) return (1);
+  else return (-1);
+}
+
+float ** extract (float **M,int n,int i,int j)
+{
+  int ii,jj,l=-1,c=-1;
+  int ii,jj;
+  float **Me;
+  Me=init(n-1);
+  for(ii=0;ii<n;ii++) {
+    if (ii!=i) {
+      l++;c=-1;
+      for (jj=0;jj<n;jj++) {
+	if (jj!=j)
+	  {
+	    c++;
+	    Me[l][c]=M[ii][jj];
+	  }
+      }
+    }
+  }
+  return(Me);
+}
+\end{verbatim}
+\end{solution}
+
+%\newpage
+\begin{solution}
+(suite)
+\begin{verbatim}
+float det(float **M,int n)
+{
+  int j=0;
+  int i;
+  float D=0;
+  
+  if (n==1)
+    {
+      return M[0][0];
+    }
+  else
+    {
+      for (i=0;i<n;i++)
+	{
+	  printf("\nn=%d,D=%f\n,m1=%d",n,D,m1(i,j));
+	  D += M[i][j]*m1(i,j) * det(extract(M,n,i,j),n-1);
+       }
+      return(D);
+    }
+}
+
+int main()
+{
+
+  float **M;
+  //float **Me;
+  float Ms[4][4]={{1,2,3,4},{10,20,11,21},{21,24,27,29},{12,14,15,16}};
+  int i,j;
+  M=init(4);
+ for(i=0;i<4;i++) {
+   for(j=0;j<4;j++) {
+     M[i][j]=Ms[i][j];
+   }
+ }
+  
+ affiche(M,4);
+ printf("\n-------------------------\n");
+ //Me=extract(M,4,0,0);
+ printf("\nDéterminant=%f\n",det(M,4));
+
+  
+
+  return(0);
+}
+
+\end{verbatim}
+\end{solution}
+\end{document}
