@@ -144,17 +144,17 @@ $\displaystyle }l<{$\end{lrbox}%
 
 \begin{document}
 
-\lhead[ROB3 ]{ROB3 }
+\lhead[ROB3/MAIN3 ]{ROB3/MAIN3 }
 \chead[]{}
 \rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2015-2016 (version enseignants)]{Polytech'Paris-UPMC 2015-2016 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version enseignants)]{Polytech'Paris-UPMC 2016-2017 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2015-2016 (version \'etudiants)]{Polytech'Paris-UPMC 2015-2016 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -217,7 +217,7 @@ Que fait ce petit algorithme ?
 \end{algorithmic}
 
 \exercice{}
-Ecrire une s\'equence d'instructions permettant de d\'eterminer le minimum de deux nombres entiers x et y.
+Ecrire une s\'equence d'instructions permettant de d\'eterminer le minimum de deux nombres entiers x et y. Le maximum.
 
 \begin{solution}
 %\begin{algorithm}[h!]
@@ -282,11 +282,36 @@ au modulo)  :
 \end{algorithmic}
 Notons que, dans cette seconde version, les diviseurs ne sont plus affichés dans l'ordre croissant.
 \end{solution}
+\exercice{- Nombres parfaits}
+Un nombre parfait est un nombre positif égal à la somme de ses diviseurs (par 
+exemple, 6 est un nombre parfait). Ecrire un algorithm qui 
+renvoie 1 si l'entier transmis en arguments est parfait, 0 sinon. 
+\begin{solution}
+\begin{algorithmic}[1]
+\REQUIRE{$x$ entier}
+\ENSURE{boolean}\\
+\hspace{-22pt}
+\noindent {\bf Donn\'ees locales : } variable de boucle $i$, variable $somme$.
+\\
+\STATE  $somme \leftarrow 0$
+\FOR{$i$ allant de 1 \`a $x$}
+\IF{$x$ mod $i = 0$}
+\STATE  $somme \leftarrow somme + i$
+\ENDIF
+\ENDFOR
+\IF{somme = x}
+\RETURN $1$
+\ELSE
+\RETURN $0$
+\ENDIF
+\end{algorithmic}
+\end{solution}
+
 \exercice{- Inversion de variables}
 
 \'Ecrire un algorithme qui prend en entr\'ee deux variables enti\`eres {\tt a} et {\tt b} et qui inverse
 leurs contenus.
-Vous pouvez faire deux version, l'une en utilisant une variable locale et sans utiliser de variable locale.
+Vous pouvez faire deux versions, l'une en utilisant une variable locale et sans utiliser de variable locale.
 
 \begin{solution}
 \begin{algorithmic}[1]
@@ -388,53 +413,57 @@ Ecrire l'algorithme permettant de calculer $n^m$ (n et m entiers positifs ou nul
 %\end{algorithm}
 \end{solution}
 
-\exercice{}
-%\subsection{Calcul de l'heure d'arriv\'ee d'un train}
-Ecrire l'algorithme  permettant de calculer l'heure d'arriv\'ee d'un train, connaissant son heure de
-d\'epart ainsi que le temps de trajet n\'ecessaire. L'heure de d\'epart est mod\'elis\'ee sous la forme d'un triplet d'entiers $(h_d,m_d,s_d)$ avec 
-\begin{itemize}
-\item $h_d$ : heure de d\'epart ($0\le h_d\le 23$)
-\item $m_d$ : minutes de d\'epart  ($0\le m_d \le 59$)
-\item $s_d$ : secondes de d\'epart  ($0\le s_d\le59$)
-\end{itemize}
-De la m\^eme mani\`ere le temps de trajet et l'heure d'arriv\'ee sont respectivement mod\'elis\'es sous la forme de triplets d'entiers $(h_t,m_t,s_t)$ et $(h_a,m_a,s_a)$ 
+\exercice{ - Crible d'\'Eratosth\`ene}
+L'algorithme procède par élimination : il s'agit de supprimer d'une table des entiers de 2 à N tous les multiples d'un entier. En supprimant tous les multiples, à la fin il ne restera que les entiers qui ne sont multiples d'aucun entier, et qui sont donc les nombres premiers. 
 
-\begin{solution}
-%\begin{algorithm}[h!]
-%\caption{Calcul de l'heure d'arriv\'ee d'un train}
-%\label{algo_cm}
-\begin{algorithmic}[1]
-\REQUIRE{$h_d$, $m_d$, $s_d$, $h_t$, $m_t$ , $s_t$ : entiers}\\
-\COMMENT{$h_d$, $m_d$, $s_d$ : heure de départ}\\
-\COMMENT{$h_t$, $m_t$, $s_t$ : temps de parcours}
-\ENSURE{$j_a$, $h_a$,$m_a$, $d_a$ : entiers}
-\COMMENT{heure d'arrivée}
-\STATE \COMMENT{Utilisation d'une variable  suppl\'ementaire temporaire :  $j_a$ (=1 si le train arrive le lendemain)}
-\STATE  $s_a \leftarrow 0$
-\STATE  $m_a \leftarrow 0$
-\STATE  $h_a \leftarrow 0$
-\STATE  $j_a \leftarrow 0$
-\STATE  $s_a \leftarrow s_d +s_t$
-\IF{$s_a \ge 60$}
-\STATE $s_a \leftarrow s_a-60$
-\STATE $m_a \leftarrow  1$
-\ENDIF
-\STATE  $m_a \leftarrow m_d+m_t$
-\IF{$m_a \ge 60$}
-\STATE $m_a \leftarrow m_a-60$
-\STATE $ha \leftarrow  1$
-\ENDIF
-\STATE  $h_a \leftarrow h_d+h_t$
-\IF{$h_a \ge 24$}
-\STATE $h_a \leftarrow h_a-24$
-\STATE $j_a \leftarrow  1$
-\ENDIF
-\RETURN $(j_a,h_a,m_a,d_a)$
-\end{algorithmic}
-%\end{algorithm}
 
-On peut aussi utiliser la division enti\`ere et l'op\'erateur modulo.
-\end{solution}
+%\exercice{}
+%%\subsection{Calcul de l'heure d'arriv\'ee d'un train}
+%Ecrire l'algorithme  permettant de calculer l'heure d'arriv\'ee d'un train, connaissant son heure de
+%d\'epart ainsi que le temps de trajet n\'ecessaire. L'heure de d\'epart est mod\'elis\'ee sous la forme d'un triplet d'entiers $(h_d,m_d,s_d)$ avec 
+%\begin{itemize}
+%\item $h_d$ : heure de d\'epart ($0\le h_d\le 23$)
+%\item $m_d$ : minutes de d\'epart  ($0\le m_d \le 59$)
+%\item $s_d$ : secondes de d\'epart  ($0\le s_d\le59$)
+%\end{itemize}
+%De la m\^eme mani\`ere le temps de trajet et l'heure d'arriv\'ee sont respectivement mod\'elis\'es sous la forme de triplets d'entiers $(h_t,m_t,s_t)$ et $(h_a,m_a,s_a)$ 
+%
+%\begin{solution}
+%%\begin{algorithm}[h!]
+%%\caption{Calcul de l'heure d'arriv\'ee d'un train}
+%%\label{algo_cm}
+%\begin{algorithmic}[1]
+%\REQUIRE{$h_d$, $m_d$, $s_d$, $h_t$, $m_t$ , $s_t$ : entiers}\\
+%\COMMENT{$h_d$, $m_d$, $s_d$ : heure de départ}\\
+%\COMMENT{$h_t$, $m_t$, $s_t$ : temps de parcours}
+%\ENSURE{$j_a$, $h_a$,$m_a$, $d_a$ : entiers}
+%\COMMENT{heure d'arrivée}
+%\STATE \COMMENT{Utilisation d'une variable  suppl\'ementaire temporaire :  $j_a$ (=1 si le train arrive le lendemain)}
+%\STATE  $s_a \leftarrow 0$
+%\STATE  $m_a \leftarrow 0$
+%\STATE  $h_a \leftarrow 0$
+%\STATE  $j_a \leftarrow 0$
+%\STATE  $s_a \leftarrow s_d +s_t$
+%\IF{$s_a \ge 60$}
+%\STATE $s_a \leftarrow s_a-60$
+%\STATE $m_a \leftarrow  1$
+%\ENDIF
+%\STATE  $m_a \leftarrow m_d+m_t$
+%\IF{$m_a \ge 60$}
+%\STATE $m_a \leftarrow m_a-60$
+%\STATE $ha \leftarrow  1$
+%\ENDIF
+%\STATE  $h_a \leftarrow h_d+h_t$
+%\IF{$h_a \ge 24$}
+%\STATE $h_a \leftarrow h_a-24$
+%\STATE $j_a \leftarrow  1$
+%\ENDIF
+%\RETURN $(j_a,h_a,m_a,d_a)$
+%\end{algorithmic}
+%%\end{algorithm}
+%
+%On peut aussi utiliser la division enti\`ere et l'op\'erateur modulo.
+%\end{solution}
 
 
 \end{document}
