@@ -134,7 +134,7 @@ numbers=left,                    % where to put the line-numbers; possible value
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newboolean{sol}
-\setboolean{sol}{true}
+\setboolean{sol}{false}
 %\setboolean{sol}{false}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -173,11 +173,11 @@ numbers=left,                    % where to put the line-numbers; possible value
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2014-2015 (version enseignants)]{Polytech'Paris-UPMC 2014-2015 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version enseignants)]{Polytech'Paris-UPMC 2016-2017 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2014-2015 (version \'etudiants)]{Polytech'Paris-UPMC 2014-2015 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -195,7 +195,7 @@ numbers=left,                    % where to put the line-numbers; possible value
 
 \chapter*{Travaux Pratiques n°1}
 
-
+\iffalse
 \exercice{- Paramétrer son navigateur internet}
 Procédure :
 \begin{enumerate}
@@ -253,6 +253,7 @@ Vous pouvez travailler depuis chez vous, en vous connectant sur le \textbf{pc57}
 Dans l'hypothèse (peu probable) où votre système d'exploitation serait \textit{Windows}, il y a un outil qui est décrit dans Sakai (MobaXterm, fichier \verb|Travailler_sous_windows.pdf|).
 
 Notez que le \textbf{pc57} n'est que le point d'entrée dans le réseau polytech. Il est impossible d'y travailler. Une fois que l'on est connecté sur \textbf{pc57}, il faut se connecter via \verb|ssh| sur un autre PC (normalement, les PC "toujours" disponibles sont pc4021, pc4022, pc4023, pc4024, pc4025 et pc4026).
+\fi
 
 \exercice{- Se préparer au TP1}
 \begin{enumerate}
@@ -337,7 +338,6 @@ Même chose que l'exercice précédent mais c'est à l'utilisateur du programme d'in
 
 /* Fonction principale */
 
-
 int main(void)
 {
   int n ; //Déclare l'entier n
@@ -371,72 +371,7 @@ int main(void)
 \end{lstlisting}
 \end{solution}
 
-
-\exercice{}
-Ecrire le programme qui énumère les diviseurs d'un entier $n$
-strictement positif.
-
-Vous pourrez améliorer le programme en affichant ``l'entier est un
-nombre premier'' dans le cas où seul $1$ et $n$ sont des diviseurs.
-
-\begin{solution}
-\lstinputlisting{diviseurs.c}
-
-Ce programme peut-être amélioré car il affiche deux fois la racine
-si l'entier est un carré parfait.
-\end{solution}
-\exercice{}
-Écrire le programme C du jeu qui fabrique un nombre au hasard entre 1
-et 100, et le fait ensuite deviner à l'utilisateur. Celui-ci propose une valeur et
-l'ordinateur répond trop petit ou trop grand jusqu'à ce qu'il trouve la bonne
-réponse. \\
-Modifiez ensuite le programme pour qu'il affiche le nombre de coups. 
-
-Aide: utiliser la fonction \texttt{rand()} qui génére un nombre entier aléatoire compris entre \texttt{0} et \texttt{RAND\_MAX}. Pour utiliser cette fonction il faut ajouter \texttt{\#include <stdlib.h>} au début de votre fichier.
-
-\begin{solution}
-
-\begin{lstlisting}
-#include <stdio.h>
-#include <stdlib.h>
-/* Fonction principale */
-
-
-int main(void)
-{
-  int n;
-  int l;
-  int linf,lsup;
-  int cnt;
-  n=rand()%100;
-  l=-1;
-  cnt=0;
-  linf=0;
-  lsup=100;
-  while(l!=n)
-    {
-      cnt++;   
-      printf("\nEntrez un nombre entre %d et %d : ",linf,lsup);
-      scanf("%d",&l);
-	if (l<n)
-	  {
-	    printf("\n Le nombre à trouver est plus grand");
-	    linf=l;
-	  }
-      if(l>n)
-	{
-	  printf("\n Le nombre à trouver est plus petit");
-	  lsup=l;
-	}
-    }
-  printf("\n Vous avez trouvé le bon nombre : %d en %d essais\n",n,cnt);
-  return(0);
-} 
-\end{lstlisting}
-\end{solution}
-
-
-\exercice{}
+\exercice{PGCD}
 Ecrire un progamme qui lit deux entiers, v\'erifie qu'ils sont bien strictement positifs
 et affiche leur {\tt PGCD}.
 \begin{solution}
@@ -464,13 +399,145 @@ if ( (a>0) && (b>0) )
 \end{lstlisting}
 \end{solution}
 
-\exercice {Traitement d'un entier}
+\exercice{Entier inversé}
+Écrire un programme qui demande à l'utilisateur de saisir un entier strictement positif, puis affiche cet entier dans le sens inverse. Par exemple, si l'utilisateur saisit $5628$, le programme affiche $8265$.
 
-Ecrire programme qui affiche le nombre de chiffres 1 contenu dans
-un entier entré au clavier. Par exemple, pour $n=1151$, le programme affichera $3$.
 \begin{solution}
-\lstinputlisting{nbocc.c}
+
+	\lstinputlisting{tp1_exo_10.c}
 \end{solution}
+
+\exercice{FizzBuzz}
+Écrire en C un programme qui affiche les nombres de 1 à 100, sauf:
+	\begin{itemize}
+		\item si le nombre est un multiple de 3 ou se termine par 3, auquel cas il affiche \texttt{"Fizz"}
+		\item si le nombre est un multiple de 7 ou se termine par 7, auquel cas il affiche \texttt{"Buzz"}
+		\item si le nombre vérifie les 2 propositions, le programme affiche \texttt{"FizzBuzz"}
+	\end{itemize}
+	Le tester, et vérifier que l'on obtient bien (pour les 1ères valeurs)
+ \texttt{"1 2 Fizz 4 5 Fizz Buzz 8 Fizz 10 11 Fizz Fizz Buzz Fizz 16 Buzz Fizz ...."}
+
+\begin{solution}
+	\lstinputlisting{fizzbuzz.c}
+\end{solution}
+
+\exercice{}
+On souhaite écrire un programme qui lit un nombre hexadécimal comme une suite de caractères, vérifie sa validité et effectue la conversion décimale. L'itération s'arrêtera quand on lira un caractère ne représentant pas un chiffre hexadécimal, et on calculera la valeur au fur et à mesure.
+
+\begin{itemize}
+	\item Écrire en pseudo-code l'algorithme
+	\item Écrire le code \texttt{C} correspondant
+\end{itemize}
+
+
+\begin{solution}
+
+\begin{itemize}
+ 
+	\item Algorithme
+\begin{verbatim}
+ lire(c)
+
+ Tant que c est valide faire
+	nb <- nb*16
+
+	si '0' <= c <= '9' alors
+		nb <- nb + (c - '0')
+	sinon si 'a' <= c <= 'f' alors
+		nb <- nb + (c - 'a' + 10)
+	sinon
+		nb <- nb + (c - 'A' + 10)
+	finsi
+	
+	lire(c)
+ FinTantQue
+\end{verbatim}
+puis (approche descendante)
+\begin{verbatim}
+ "c est valide" s'écrit (c>='0' et c<='9') ou
+  (c>='a' et c<='f') ou (c>='A' et c<='F')
+\end{verbatim}
+	\item le code:
+	{\lstinputlisting{conversionHexa.c}}
+\end{itemize}
+
+\end{solution}
+
+%\exercice{}
+%Ecrire le programme qui énumère les diviseurs d'un entier $n$
+%strictement positif.
+%
+%Vous pourrez améliorer le programme en affichant ``l'entier est un
+%nombre premier'' dans le cas où seul $1$ et $n$ sont des diviseurs.
+%
+%\begin{solution}
+%\lstinputlisting{diviseurs.c}
+%
+%Ce programme peut-être amélioré car il affiche deux fois la racine
+%si l'entier est un carré parfait.
+%\end{solution}
+
+
+%\exercice{}
+%Écrire le programme C du jeu qui fabrique un nombre au hasard entre 1
+%et 100, et le fait ensuite deviner à l'utilisateur. Celui-ci propose une valeur et
+%l'ordinateur répond trop petit ou trop grand jusqu'à ce qu'il trouve la bonne
+%réponse. \\
+%Modifiez ensuite le programme pour qu'il affiche le nombre de coups. 
+%
+%Aide: utiliser la fonction \texttt{rand()} qui génére un nombre entier aléatoire compris entre \texttt{0} et \texttt{RAND\_MAX}. Pour utiliser cette fonction il faut ajouter \texttt{\#include <stdlib.h>} au début de votre fichier.
+%
+%\begin{solution}
+%
+%\begin{lstlisting}
+%#include <stdio.h>
+%#include <stdlib.h>
+%/* Fonction principale */
+%
+%
+%int main(void)
+%{
+%  int n;
+%  int l;
+%  int linf,lsup;
+%  int cnt;
+%  n=rand()%100;
+%  l=-1;
+%  cnt=0;
+%  linf=0;
+%  lsup=100;
+%  while(l!=n)
+%    {
+%      cnt++;   
+%      printf("\nEntrez un nombre entre %d et %d : ",linf,lsup);
+%      scanf("%d",&l);
+%	if (l<n)
+%	  {
+%	    printf("\n Le nombre à trouver est plus grand");
+%	    linf=l;
+%	  }
+%      if(l>n)
+%	{
+%	  printf("\n Le nombre à trouver est plus petit");
+%	  lsup=l;
+%	}
+%    }
+%  printf("\n Vous avez trouvé le bon nombre : %d en %d essais\n",n,cnt);
+%  return(0);
+%} 
+%\end{lstlisting}
+%\end{solution}
+
+
+
+
+%\exercice {Traitement d'un entier}
+%
+%Ecrire programme qui affiche le nombre de chiffres 1 contenu dans
+%un entier entré au clavier. Par exemple, pour $n=1151$, le programme affichera $3$.
+%\begin{solution}
+%\lstinputlisting{nbocc.c}
+%\end{solution}
 
 \exercice {Suite de Fibonacci}
 La suite de Fibonacci est définie de manière récursive par la relation : $u_n = u_{n-1} + u_{n-2}$.\\
