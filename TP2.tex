@@ -169,17 +169,17 @@ numbers=left,                    % where to put the line-numbers; possible value
 
 \begin{document}
 
-\lhead[ROB3 ]{ROB3 }
+\lhead[ROB3/MAIN3 ]{ROB3/MAIN3 }
 \chead[]{}
 \rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2015-2016 (version enseignants)]{Polytech'Paris-UPMC 2015-2016 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version enseignants)]{Polytech'Paris-UPMC 2016-2017 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2015-2016 (version \'etudiants)]{Polytech'Paris-UPMC 2015-2016 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -204,6 +204,14 @@ Ecrire le programme permettant d'initialiser un tableau de taille N (N est une \
 
 \begin{solution}
 \lstinputlisting{tp3_exo1.c}
+\end{solution}
+
+\exercice{- Recherche d'éléments}
+Dans la suite du programme précédant, écrire une procédure permettant d'afficher l'indice d'un élément $n$ entré au clavier. Si l'élément $n$ est présent
+plusieurs fois, le programme affiche le plus petit indice. Si l'élément n'est pas présent, afficher : \texttt{"n not found"}
+
+\begin{solution}
+\lstinputlisting{tp3_rech.c}
 \end{solution}
 
 \exercice{- Suppression des doublons}
@@ -236,6 +244,8 @@ Réécrire le programme de l'exercice \textit{Suppression des doublons} avec le ta
 \begin{solution}
 \lstinputlisting{tp3_exo4.c}
 \end{solution}
+
+
 
 \exercice{}
 Ecrire un programme qui prend en entrée un tableau d'entiers \verb|T|, et deux entiers \verb|i| et \verb|j| et qui échange les éléments du tableau d'indice \verb|i| et \verb|j|.
