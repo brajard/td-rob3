@@ -140,17 +140,17 @@ $\displaystyle }l<{$\end{lrbox}%
 
 \begin{document}
 
-\lhead[ROB3 ]{ROB3 }
+\lhead[ROB3/MAIN3 ]{ROB3/MAIN3 }
 \chead[]{}
 \rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2015-2016 (version enseignants)]{Polytech'Paris-UPMC 2015-2016 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version enseignants)]{Polytech'Paris-UPMC 2016-2017 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2015-2016 (version \'etudiants)]{Polytech'Paris-UPMC 2015-2016 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -168,82 +168,7 @@ $\displaystyle }l<{$\end{lrbox}%
 
 \chapter*{Travaux Dirigés n°3}
 
-\exercice {} 
-Ecrire l'algorithme qui compte le nombre de déplacements effectués par
-la tête de lecture/écriture d'une
-machine de Turing avant qu'elle ne s'arrête. On considère une machine
-de Turing à 5 états de 0 à 4 et un état particulier -1 qui arrête la
-machine.
-La machine peut lire ou écrire uniquement des 0 ou des 1 sur le ruban.
-On modélise la machine de
-Turing de la façon suivante
-\begin{itemize}
-\item Un tableau d'entiers \texttt{ruban} de taille 100 qui représente le ruban
-  (normalement infini). \texttt{ruban} sera
-  initialisé avec que des zéros.\\
-\item Un entier \texttt{pos} représentant la position du curseur sur le
-tableau \texttt{ruban}. \texttt{pos} sera initialisé à $50$.\\
-\item Un entier \texttt{cstate} représentant l'état courant de la
-  machine. \texttt{cstate} sera initalisé à 0.
-\item Un tableau d'entiers \texttt{write0} (resp. \texttt{write1}) de taille 5
-  qui donne la valeur à écrire sur le ruban de la machine dans le cas
-  où on lit un 0 (resp. 1). Par exemple, si la machine lit un 0 sur le
-  ruban, et que son état courant est 3, alors on effectue l'affectation
-  suivante : \texttt{ruban[pos]=write1[3];}. Notez que les tableaux
-  \texttt{write0} et \texttt{write1} ne contiennent que des 0 ou des 1.\\
-\item Un tableau d'entiers \texttt{depl0} (resp. \texttt{depl1}) de
-  taille 5 qui donne le déplacement de la tête de lecture avec -1 pour
-  un déplacement vers la gauche et +1 pour un déplacement vers la
-  droite. Par exemple, si la machine lit un 1 sur le ruban et que son
-  état courant est 4, alors, la position de la tête de lecture est
-  modifiée de la façon suivante : \texttt{pos=pos+depl1[4]}.\\
-\item Un tableau d'entiers  \texttt{nextstate0} (resp.  \texttt{nextstate1)} de taille 5 qui donne
-  la valeur du prochain état de la machine dans le cas où on lit un 0
-  (resp. 1). Par exemple, si la machine lit un 1 sur le ruban et que
-  son état courant est 2, alors, le prochain état sera l'entier
-  contenu dans  \texttt{nextstate1[2]} (\texttt{cstate=nexstate1[2]}). Attention, il y a un élément du tableau
-  \texttt{nextstate0} ou \texttt{nextstate1} qui est égal à -1 qui
-  arrête la machine.\\
-\end{itemize}
-Pour tester l'algorithme, on prendra la machine de Turing suivante :
-\begin{itemize}
-\item \texttt{write0=\{1,1,1,1,1\}}
-\item \texttt{write1=\{0,1,0,0,0\}}
-\item \texttt{depl0=\{1,1,1,1,-1\}}
-\item \texttt{depl1=\{-1,-1,-1,-1,1\}}
-\item \texttt{nextstate0=\{1,2,3,4,3\}}
-\item \texttt{nextstate1=\{-1,0,1,2,4\}}
-\end{itemize}
 
-\begin{solution}
-%\begin{algorithm}[h!]
-%\caption{D\'etermination d'un nombre d'occurences d'un entier dans une saisie}
-%\label{algo_cm}
-\begin{algorithmic}[1]
-\REQUIRE{write0,write1,depl0,depl1,nexstate0,nexstate1 : tableaux d'entiers}
-\ENSURE{compte : entier, nombre de déplacement}
-\\
-{\bf Donn\'ees locales : } pos,cstate : entiers ; ruban[] : tableau d'entiers
-\\
-\STATE pos $\leftarrow 50$
-\STATE cstate $\leftarrow 0$
-\STATE compte $\leftarrow 0$
-\STATE Initialise ruban avec des zéros
-\WHILE{cstate $\neq -1$}
-\IF{ruban[pos] $=0$}
-\STATE ruban[pos] $\leftarrow$ write0[cstate]
-\STATE pos $\leftarrow$ pos + depl0[cstate]
-\STATE cstate $\leftarrow$ nextstate0[cstate]
-\ELSE
-\STATE ruban[pos] $\leftarrow$ write1[cstate]
-\STATE pos $\leftarrow$ pos + depl1[cstate]
-\STATE cstate $\leftarrow$ nextstate1[cstate]
-\ENDIF
-\STATE compte=compte+1
-\ENDWHILE
-\end{algorithmic}
-%\end{algorithm}
-\end{solution}
 
 \exercice{- factoriel}
 Ecrire 2 algorithmes permettant de calculer $n!$. L'un des algorithmes sera itératif et l'autre récursif.
@@ -251,7 +176,7 @@ Ecrire 2 algorithmes permettant de calculer $n!$. L'un des algorithmes sera itér
 \exercice {- suite de Fibonacci}
 La suite de Fibonacci est définie de manière récursive par la relation : $u_n = u_{n-1} + u_{n-2}$.\\
 et par les conditions initiales : $u_0=u_1=1$.\\
-Construire un algorithme récursif permettant de calculer le n-ième terme.
+Construire un algorithme d'abord itératif, puis récursif permettant de calculer le n-ième terme.
 
 \begin{solution}
 \begin{verbatim}
@@ -277,6 +202,10 @@ int fibonacci(int n)
 \end{verbatim}
 \end{solution}
 
+\exercice{- Puissance k-ième iterative}
+Ecrire un algorithme prenant en entrée deux entiers $n$ et $k$ ($k>0$) qui
+renvoie $n^k$. Il est bien entendu interdit d'utiliser une fonction ou un
+opérateur calculant directement cette puissance.
 
 \exercice {- Puissance k-ième récursive }
 Pour calculer $n^k$ ($n$,$k$, entiers positifs), on peut utiliser le principe de récursion suivant:
