@@ -1,0 +1,350 @@
+\documentclass[french,12pt,a4paper,twoside,openright,titlepage]{report}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[latin1]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{babel}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{ifthen}
+\usepackage{xcomment}
+\usepackage{array}
+\usepackage{rotating}
+
+\textwidth17cm
+\textheight25cm
+%\oddsidemargin-1cm
+%\parskip0.2pt
+\voffset-2cm
+\hoffset-1cm
+\headsep0.5cm
+\topmargin0.5cm
+\oddsidemargin0.5cm
+\evensidemargin0.5cm
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\newlength{\mylength}
+\newcounter{exo}\stepcounter{exo}
+
+\newcommand\exercice[1]{
+\subsubsection*{Exercice \theexo\stepcounter{exo} {#1}}
+%{\bf Exercice \theexo\stepcounter{exo}\\}
+}
+
+
+
+\RequirePackage{layout,color}
+
+\definecolor{gray50}{gray}{.5}
+\definecolor{gray40}{gray}{.6}
+\definecolor{gray30}{gray}{.7}
+\definecolor{gray20}{gray}{.8}
+\definecolor{gray10}{gray}{.9}
+\definecolor{gray05}{gray}{.95}
+
+\newsavebox{\laboiboite}
+\newlength{\longdelaboiboite}
+\newlength{\deptdelaboiboite}
+\newlength{\hautdelaboiboite}
+\newcolumntype{R}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }r<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{C}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }c<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+\newcolumntype{L}{>{\begin{lrbox}{\laboiboite} 
+$\displaystyle }l<{$\end{lrbox}%
+    \settowidth{\longdelaboiboite}{\usebox{\laboiboite}}%
+    \settoheight{\hautdelaboiboite}{\usebox{\laboiboite}}%
+    \settodepth{\deptdelaboiboite}{\usebox{\laboiboite}}%
+    \addtolength{\hautdelaboiboite}{\deptdelaboiboite}%
+    \addtolength{\hautdelaboiboite}{2ex}%
+    \parbox[c][\hautdelaboiboite][c]{0cm}{} \makebox[\width]
+{\usebox{\laboiboite}}}}
+
+\newcolumntype{S}{>{\begin{lrbox}{\laboiboite}}r<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{D}{>{\begin{lrbox}{\laboiboite}}c<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newcolumntype{M}{>{\begin{lrbox}{\laboiboite}}l<{\end{lrbox}%
+    \mbox{\usebox{\laboiboite}}}}
+\newlength\Linewidth
+\def\findlength{\setlength\Linewidth\linewidth
+\addtolength\Linewidth{-4\fboxrule}
+\addtolength\Linewidth{-3\fboxsep}
+}
+\newenvironment{examplebox}{\par\begingroup%
+   \setlength{\fboxsep}{5pt}\findlength%
+   \setbox0=\vbox\bgroup\noindent%
+   \hsize=\Linewidth%
+   \begin{minipage}{\Linewidth}\small}%
+    {\end{minipage}\egroup%
+    \vspace{6pt}%
+    \noindent\textcolor{gray20}{\fboxsep2.5pt\fbox%
+     {\fboxsep5pt\colorbox{gray05}{\normalcolor\box0}}}%
+    \endgroup\par\addvspace{6pt minus 3pt}\noindent%
+    \normalcolor\ignorespacesafterend}
+\let\Examplebox\examplebox
+\let\endExamplebox\endexamplebox
+
+\widowpenalty 10000
+\clubpenalty 10000
+\raggedbottom
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newboolean{sol}
+\setboolean{sol}{false}
+%\setboolean{sol}{false}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
+\ifthenelse{\boolean{sol}}
+{
+\newenvironment{solution}
+{
+\begin{examplebox}
+\begin{center}
+\begin{tabular}{m{0.5cm}|m{15cm}|}\cline{2-2}
+%\begin{turn}{90}{Solution}\end{turn}&
+\rotatebox{90}{Solution}&
+\begin{minipage}[H]{\linewidth}
+\vspace{0.2cm}
+}
+{
+\vspace{0.2cm}
+\end{minipage}
+\\\cline{2-2}
+\end{tabular}
+\end{center}
+\end{examplebox}
+}
+}
+{
+\newxcomment[]{solution}
+}
+
+
+\begin{document}
+
+\lhead[ROB3/MAIN3 ]{ROB3/MAIN3 }
+\chead[]{}
+\rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
+ 
+\ifthenelse{\boolean{sol}}
+{
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version enseignants)]{Polytech'Paris-UPMC 2016-2017 (version enseignants)}
+
+}
+{
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
+}
+
+\cfoot[]{}
+\rfoot[\thepage]{\thepage}
+
+
+
+
+\pagestyle{fancyplain}
+%%%%%%%%%%%%
+
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+ %\chapter{Conception d'algorithmes}
+ %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+
+\chapter*{Travaux Pratiques n°4}
+
+\exercice {}
+
+Ecrire un aglorithme récursif qui écrit l'écriture inverse d'un entier donné en entrée. (par exemple si on entre-2344, on obtiendra l'affichage -4432).
+\begin{solution}
+\begin{verbatim}
+#include <stdio.h>
+
+void inversion (int nb);
+
+void inversion (int nb)
+{
+  if (nb < 0)
+    {
+      printf("-");
+      return inversion (-nb);
+    }
+  if (nb < 10)
+    {
+      printf("%d",nb);
+    }
+  else 
+    {
+      printf ("%d",nb % 10);
+      return inversion (nb/10);
+    }
+}
+
+int main(void)
+{
+  int nb;
+  printf ("Entrer un nombre\n");
+  scanf ("%d",&nb);
+  
+  inversion (nb);
+  printf("\n");
+  return 0;
+}
+\end{verbatim}
+\end{solution}
+
+\exercice{Problème "Couicable".}
+\begin{enumerate}
+\item Ecrire une fonction {\tt nbDeChiffres(x)} qui retourne le nombre de 
+chiffres composant un entier $x$ transmis en arguments
+\begin{solution}
+\begin{verbatim}
+int nbDeChiffres(int x){
+   int nbChiffres=0;
+   if (x == 0) // cas delicat : x est le nombre 0
+      return 1;
+   else {
+      while (x > 0) {
+         nbChiffres ++;
+         x /= 10;
+      }
+      return nbChiffres;
+   }
+}
+\end{verbatim}
+\end{solution}
+
+\item Ecrire une fonction {\tt extraitNombre(x,n,lg)} qui extrait de $x$ entier positif, à 
+partir du nième chiffre en partant de la droite, le nombre composé de $lg$ 
+chiffres. Elle renvoie -1 si les entrées ne sont pas correctes.\\
+Exemple 1, {\tt extraitNombre(45863047,4,3)} renvoie 586.\\
+Exemple 2, {\tt extraitNombre(45863047,6,4)} renvoie -1.\\
+
+\begin{solution}
+{\scriptsize
+\begin{verbatim}
+int extraitNombre(int x, int n, int lg){
+   int puiss=1;
+
+   // Etape 0 : verifier que l'operation est realisable (etape facultative)
+   if ((n > nbDeChiffres(x)) || (lg > nbDeChiffres(x)) || ((n+lg) > nbDeChiffres(x)))
+      return -1;
+   if (n<0 || x<0 || log <0)
+      return -1;
+
+   // Etape 1 : enlever les n derniers chiffres de x
+   while (n>0) {
+      x /= 10;
+      n --;
+   }
+
+   // Etape 2 : garder les lg derniers chiffres du "nouveau" x
+   while (lg > 0) {
+      puiss *= 10;
+      lg --;
+   } 
+   x %= puiss;
+   return x;
+} 
+\end{verbatim}
+}
+\end{solution}
+
+\item Ecrire une fonction {\tt estPair(x)} qui renvoie 1 si le nombre de chiffres de $x$ est pair, 0 sinon.
+\begin{solution}
+\begin{verbatim}
+int estPair(x){
+   if ((nbDeChiffres(x) % 2) == 0) 
+      return 1;
+   else return 0;
+}
+\end{verbatim}
+\end{solution}
+
+
+
+\item Ecrire une fonction {\tt sommeDesChiffres(x)} qui renvoie la somme des 
+chiffres composant le nombre $x$ transmis en arguments
+\begin{solution}
+\begin{verbatim}
+int sommeDesChiffres(int x){
+   int somme=0;
+
+   while (x > 0) {
+      somme += x%10;
+      x /= 10;
+   }
+   return somme;
+}
+\end{verbatim}
+\end{solution}
+
+\item Un nombre $x$ est dit couicable si la somme des chiffres de sa partie 
+droite est égale à la somme des chiffres de sa partie gauche. Le nombre de 
+chiffres composant le nombre étudié doit être pair.Par exemple, 256823 est 
+couicable. Ecrire la fonction {\tt estCouicable(x)} qui affiche si $x$, 
+transmis en arguments, est un nombre couicable ou non.  
+\begin{solution}
+{\footnotesize
+\begin{verbatim}
+void estCouicable(int x){
+   int gauche, droite, nbChiffres, puiss=1;
+
+   if (!estPair(x))
+      printf("\n%d n'est pas couicable : nombre de chiffres impair",x);
+   else {
+      // On reccupere les parties droite et gauche de x
+      nbChiffres = nbDeChiffres(x);
+      droite = extraitNombre(x,0,nbChiffres/2);
+      gauche = extraitNombre(x,nbChiffres/2,nbChiffres/2);
+      if (sommeDesChiffres(droite) != sommeDesChiffres(gauche))
+         printf("\n%d n'est pas couicable",x);
+      else
+         printf("\n%d est couicable",x);
+   }
+}
+\end{verbatim}
+}
+\end{solution}
+\end{enumerate}
+
+\exercice{}
+Ecrire une fonction qui prend en entrée deux chaînes de caractères \verb|s1| et \verb|s2| et modifie \verb|s1| de façon à supprimer la sous-chaîne \verb|s2|. Si \verb|s2| n'est pas incluse dans \verb|s1|, la fonction de modifie pas \verb|s1|. Si \verb|s2| est présent plusieurs fois dans \verb|s1|, on supprime chaque occurence.
+
+\exercice{}
+Les parenthèses permettent, par exemple, de changer la priorité des opérations dans une expression algébrique.
+Ex : $(a+2*(x-y))*(b+2)$. Si les parenthèses permettent de définir une expression algébrique valide, on dit alors que l'expression est bien parenthésée. Dans la cas contraire, l'expression est dite mal parenthésée. Le but de cet exercice est d'écrire un programme permettant de tester la validité des parenthèses dans une expression algébrique.
+\begin{enumerate}
+\item Une expression est considérée comme une chaîne de caractères. Un première étape est de supprimer les caractères de l'expression. Par exemple l'expression donnée précédemment devient : $(())()$.  Ecrire une fonction prenant en entrée une expression algébrique, et renvoyant un tableau de caractères ne contenant que les parenthèses (ce tableau sera un tableau statique passé en entrée qui sera modifié par la fonction). \\
+\item Dites si les expressions suivantes sont bien ou mal parenthésées. Dans le cas ou elles sont mal parenthésées, expliquez pourquoi :
+\begin{itemize}
+\item $()(())$
+\item $()))$
+\item $())(()$
+\end{itemize}
+\item Proposez une fonction prenant en entrée un tableau de caractères ne contenant que des parenthèses et renvoyant 1  si l'expression est bien parenthésée et 0 si elle est mal parenthésée.\\
+\item Proposez une fonction prenant en entrée un tableau de caractères T ne contenant que des parenthèse et renvoyant la plus longue expression bien parenthésée contenue dans T.\\
+
+\end{enumerate}
+
+\end{document}
