@@ -197,7 +197,7 @@ Ecrire une fonction \verb|void ech(int tab[],int i, int j)| qui échange l'élémen
 
 \exercice{(Tri par sélection)}
 
-Ecrire et tester une fonction C  \texttt{void tri\_selec(int tab[], int n)} qui implémente l'algorithme de tri par sélection basé sur le principe suivant :
+Ecrire et tester une fonction   \texttt{void tri\_selec(int tab[], int n)} qui implémente l'algorithme de tri par sélection basé sur le principe suivant :
 On sélectionne tout d'abord l'élément le plus petit du tableau, c.à d. on trouve l'entier 
 $p$ tel que $\forall 0 \leq i \le n, t[i] \geq t[p]$. Une fois cet emplacement trouvé, on échange les élements 
 $t[0]$ et $t[p]$. Puis on recommence ces opérations pour le reste du tableau (c.à d. les éléments 
@@ -237,7 +237,7 @@ for (i = 0; i < N - 1; i++) {
 
 \exercice{(Tri à bulle)}
 
-Ecrire une fonction C  \texttt{void tri\_bulle(int tab[], int n)}qui implémente l'algorithme de tri à bulle.  \verb|n| représente le nombre d'éléments à trier.
+Ecrire une fonction   \texttt{void tri\_bulle(int tab[], int n)}qui implémente l'algorithme de tri à bulle.  \verb|n| représente le nombre d'éléments à trier.
 
 Le principe du tri à bulle est de comparer successivement tous les éléments adjacents d'un tableau (en commençant par le premier) et de les échanger si 
 l'élément d'indice $i$ est supérieur à l'élément d'indice $i+1$. On recommence cette opération tant que tous les éléments ne sont pas triés.
@@ -274,7 +274,7 @@ while (echange) {
 
 
 \exercice{(Tri par insertion)}
-Ecrire une fonction C  \texttt{void tri\_bulle(int tab[], int n)}qui implémente l'algorithme de tri par insertion.  \verb|n| représente le nombre d'éléments à trier.
+Ecrire une fonction   \texttt{void tri\_insertion(int tab[], int n)}qui implémente l'algorithme de tri par insertion.  \verb|n| représente le nombre d'éléments à trier.
 
 Le tri par insertion consiste à prendre l'élément se trouvant juste après la partie 
 déjà triée du tableau et de trouver sa place dans cette dernière (insertion). Le premier élément 
