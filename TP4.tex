@@ -112,8 +112,8 @@ $\displaystyle }l<{$\end{lrbox}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newboolean{sol}
-\setboolean{sol}{false}
 %\setboolean{sol}{false}
+\setboolean{sol}{true}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
@@ -147,7 +147,7 @@ $\displaystyle }l<{$\end{lrbox}%
 
 \lhead[ROB3/MAIN3 ]{ROB3/MAIN3 }
 \chead[]{}
-\rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
+\rhead[Informatique Générale ]{Informatique Générale}
  
 \ifthenelse{\boolean{sol}}
 {
@@ -155,7 +155,7 @@ $\displaystyle }l<{$\end{lrbox}%
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version étudiants)]{Polytech'Paris-UPMC 2016-2017 (version étudiants)}
 }
 
 \cfoot[]{}
@@ -167,15 +167,16 @@ $\displaystyle }l<{$\end{lrbox}%
 \pagestyle{fancyplain}
 %%%%%%%%%%%%
 
- %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+ %\addcontentsline{toc}{chapter}{Série 1 : Conception d'algorithmes}
  %\chapter{Conception d'algorithmes}
- %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+ %\addcontentsline{toc}{chapter}{Série 1 : Conception d'algorithmes}
 
 \chapter*{Travaux Pratiques n°4}
 
 \exercice {}
 
-Ecrire un aglorithme récursif qui écrit l'écriture inverse d'un entier donné en entrée. (par exemple si on entre-2344, on obtiendra l'affichage -4432).
+Écrire un algorithme récursif qui affiche l'écriture inverse d'un
+entier donné en entrée (par exemple si on entre -2344, on obtiendra l'affichage -4432).
 \begin{solution}
 \begin{verbatim}
 #include <stdio.h>
@@ -213,10 +214,10 @@ int main(void)
 \end{verbatim}
 \end{solution}
 
-\exercice{Problème "Couicable".}
+\exercice{ -- Problème \og Couicable\fg}
 \begin{enumerate}
-\item Ecrire une fonction {\tt nbDeChiffres(x)} qui retourne le nombre de 
-chiffres composant un entier $x$ transmis en arguments
+\item Écrire une fonction {\tt nbDeChiffres(x)} qui retourne le nombre de 
+chiffres composant un entier $x$ transmis en arguments.
 \begin{solution}
 \begin{verbatim}
 int nbDeChiffres(int x){
@@ -234,8 +235,8 @@ int nbDeChiffres(int x){
 \end{verbatim}
 \end{solution}
 
-\item Ecrire une fonction {\tt extraitNombre(x,n,lg)} qui extrait de $x$ entier positif, à 
-partir du nième chiffre en partant de la droite, le nombre composé de $lg$ 
+\item Écrire une fonction {\tt extraitNombre(x,n,lg)} qui extrait de $x$ entier positif, à 
+partir du énième chiffre en partant de la droite, le nombre composé de $lg$ 
 chiffres. Elle renvoie -1 si les entrées ne sont pas correctes.\\
 Exemple 1, {\tt extraitNombre(45863047,4,3)} renvoie 586.\\
 Exemple 2, {\tt extraitNombre(45863047,6,4)} renvoie -1.\\
@@ -270,7 +271,7 @@ int extraitNombre(int x, int n, int lg){
 }
 \end{solution}
 
-\item Ecrire une fonction {\tt estPair(x)} qui renvoie 1 si le nombre de chiffres de $x$ est pair, 0 sinon.
+\item Écrire une fonction {\tt estPair(x)} qui renvoie 1 si le nombre de chiffres de $x$ est pair, 0 sinon.
 \begin{solution}
 \begin{verbatim}
 int estPair(x){
@@ -283,7 +284,7 @@ int estPair(x){
 
 
 
-\item Ecrire une fonction {\tt sommeDesChiffres(x)} qui renvoie la somme des 
+\item Écrire une fonction {\tt sommeDesChiffres(x)} qui renvoie la somme des 
 chiffres composant le nombre $x$ transmis en arguments
 \begin{solution}
 \begin{verbatim}
@@ -299,10 +300,11 @@ int sommeDesChiffres(int x){
 \end{verbatim}
 \end{solution}
 
-\item Un nombre $x$ est dit couicable si la somme des chiffres de sa partie 
+\item Un nombre $x$ est dit \textit{couicable} si la somme des chiffres de sa partie 
 droite est égale à la somme des chiffres de sa partie gauche. Le nombre de 
-chiffres composant le nombre étudié doit être pair.Par exemple, 256823 est 
-couicable. Ecrire la fonction {\tt estCouicable(x)} qui affiche si $x$, 
+chiffres composant le nombre étudié doit être pair. Par exemple, 256823 est 
+couicable. \\
+Écrire la fonction {\tt estCouicable(x)} qui affiche si $x$, 
 transmis en arguments, est un nombre couicable ou non.  
 \begin{solution}
 {\footnotesize
@@ -329,21 +331,26 @@ void estCouicable(int x){
 \end{enumerate}
 
 \exercice{}
-Ecrire une fonction qui prend en entrée deux chaînes de caractères \verb|s1| et \verb|s2| et modifie \verb|s1| de façon à supprimer la sous-chaîne \verb|s2|. Si \verb|s2| n'est pas incluse dans \verb|s1|, la fonction de modifie pas \verb|s1|. Si \verb|s2| est présent plusieurs fois dans \verb|s1|, on supprime chaque occurence.
+Écrire une fonction qui prend en entrée deux chaînes de caractères \verb|s1| et \verb|s2| et modifie \verb|s1| de façon à supprimer la sous-chaîne \verb|s2|. Si \verb|s2| n'est pas incluse dans \verb|s1|, la fonction ne modifie pas \verb|s1|. Si \verb|s2| est présente plusieurs fois dans \verb|s1|, on supprime chaque occurence.
 
 \exercice{}
 Les parenthèses permettent, par exemple, de changer la priorité des opérations dans une expression algébrique.
-Ex : $(a+2*(x-y))*(b+2)$. Si les parenthèses permettent de définir une expression algébrique valide, on dit alors que l'expression est bien parenthésée. Dans la cas contraire, l'expression est dite mal parenthésée. Le but de cet exercice est d'écrire un programme permettant de tester la validité des parenthèses dans une expression algébrique.
+Ex : $(a+2*(x-y))*(b+2)$. Si les parenthèses permettent de définir une expression algébrique valide, on dit alors que l'expression est bien parenthésée. Dans le cas contraire, l'expression est dite mal parenthésée. Le but de cet exercice est d'écrire un programme permettant de tester la validité des parenthèses dans une expression algébrique.
 \begin{enumerate}
-\item Une expression est considérée comme une chaîne de caractères. Un première étape est de supprimer les caractères de l'expression. Par exemple l'expression donnée précédemment devient : $(())()$.  Ecrire une fonction prenant en entrée une expression algébrique, et renvoyant un tableau de caractères ne contenant que les parenthèses (ce tableau sera un tableau statique passé en entrée qui sera modifié par la fonction). \\
-\item Dites si les expressions suivantes sont bien ou mal parenthésées. Dans le cas ou elles sont mal parenthésées, expliquez pourquoi :
+\item Une expression est considérée comme une chaîne de
+  caractères. Une première étape est de supprimer les caractères de
+  l'expression. Par exemple l'expression donnée précédemment devient :
+  $(())()$.  Écrire une fonction qui prend une expression algébrique en entrée et renvoie un tableau de caractères ne contenant que les parenthèses (ce tableau sera un tableau statique passé en entrée qui sera modifié par la fonction). \\
+\item Dire si les expressions suivantes sont bien ou mal parenthésées. Dans le cas où elles sont mal parenthésées, expliquer pourquoi :
 \begin{itemize}
 \item $()(())$
 \item $()))$
 \item $())(()$
 \end{itemize}
-\item Proposez une fonction prenant en entrée un tableau de caractères ne contenant que des parenthèses et renvoyant 1  si l'expression est bien parenthésée et 0 si elle est mal parenthésée.\\
-\item Proposez une fonction prenant en entrée un tableau de caractères T ne contenant que des parenthèse et renvoyant la plus longue expression bien parenthésée contenue dans T.\\
+\item Proposer une fonction prenant en entrée un tableau de caractères
+  ne contenant que des parenthèses et renvoyant 1  si l'expression est
+  bien parenthésée, 0 si elle est mal parenthésée.\\
+\item Proposer une fonction prenant en entrée un tableau de caractères T ne contenant que des parenthèse et renvoyant la plus longue expression bien parenthésée contenue dans T.\\
 
 \end{enumerate}
 
