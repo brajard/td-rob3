@@ -3,7 +3,7 @@
 TEXNAME=$1.tex
 
 #compilation version etudiante
-sed '/setboolean{sol}/ s/true/false/' $TEXNAME > etudiant.tex
+LC_CTYPE=C && LANG=C && sed '/setboolean{sol}/ s/true/false/' $TEXNAME > etudiant.tex
 latex etudiant.tex
 latex etudiant.tex
 dvips etudiant.dvi -o etudiant.ps
