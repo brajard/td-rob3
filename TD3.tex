@@ -1,7 +1,8 @@
 \documentclass[french,12pt,a4paper,twoside,openright,titlepage]{report}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage[latin1]{inputenc}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -146,11 +147,11 @@ $\displaystyle }l<{$\end{lrbox}%
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version enseignants)]{Polytech'Paris-UPMC 2016-2017 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2017-2018 (version enseignants)]{Polytech'Paris-UPMC 2017-2018 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2017-2018 (version \'etudiants)]{Polytech'Paris-UPMC 2017-2018 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -166,17 +167,17 @@ $\displaystyle }l<{$\end{lrbox}%
  %\chapter{Conception d'algorithmes}
  %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
 
-\chapter*{Travaux Dirigés n°3}
+\chapter*{Travaux DirigÃ©s nÂ°3}
 
-
+\input{turing}
 
 \exercice{- factoriel}
-Ecrire 2 algorithmes permettant de calculer $n!$. L'un des algorithmes sera itératif et l'autre récursif.
+Ecrire 2 algorithmes permettant de calculer $n!$. L'un des algorithmes sera itÃ©ratif et l'autre rÃ©cursif.
 
 \exercice {- suite de Fibonacci}
-La suite de Fibonacci est définie de manière récursive par la relation : $u_n = u_{n-1} + u_{n-2}$.\\
+La suite de Fibonacci est dÃ©finie de maniÃ¨re rÃ©cursive par la relation : $u_n = u_{n-1} + u_{n-2}$.\\
 et par les conditions initiales : $u_0=u_1=1$.\\
-Construire un algorithme d'abord itératif, puis récursif permettant de calculer le n-ième terme.
+Construire un algorithme d'abord itÃ©ratif, puis rÃ©cursif permettant de calculer le n-iÃ¨me terme.
 
 \begin{solution}
 \begin{verbatim}
@@ -186,7 +187,7 @@ int fibonacci(int);
 
 int main() {
   int result, number;
-  printf("inserisci un numero: ");
+  printf("Entrer n: ");
   scanf("%d", &number);
   result = fibonacci(number);
   printf("fibonacci(%d) = %d\n", number, result);
@@ -202,28 +203,28 @@ int fibonacci(int n)
 \end{verbatim}
 \end{solution}
 
-\exercice{- Puissance k-ième iterative}
-Ecrire un algorithme prenant en entrée deux entiers $n$ et $k$ ($k>0$) qui
+\exercice{- Puissance k-iÃ¨me iterative}
+Ecrire un algorithme prenant en entrÃ©e deux entiers $n$ et $k$ ($k>0$) qui
 renvoie $n^k$. Il est bien entendu interdit d'utiliser une fonction ou un
-opérateur calculant directement cette puissance.
+opÃ©rateur calculant directement cette puissance.
 
-\exercice {- Puissance k-ième récursive }
-Pour calculer $n^k$ ($n$,$k$, entiers positifs), on peut utiliser le principe de récursion suivant:
+\exercice {- Puissance k-iÃ¨me rÃ©cursive }
+Pour calculer $n^k$ ($n$,$k$, entiers positifs), on peut utiliser le principe de rÃ©cursion suivant:
 \begin{itemize}
-\item si $k=0$ alors, le résultat est 1.
-\item si $k=2 \times p$ (k est pair), alors on calcule (selon le même principe) $m=n^p$ puis le résultat est $m \times m$.
-\item si $k=2 \times p + 1$ (k est impair), alors on calcule (selon le même principe) $m=n^p$ puis le résultat est $n \times m \times m$.
+\item si $k=0$ alors, le rÃ©sultat est 1.
+\item si $k=2 \times p$ (k est pair), alors on calcule (selon le mÃªme principe) $m=n^p$ puis le rÃ©sultat est $m \times m$.
+\item si $k=2 \times p + 1$ (k est impair), alors on calcule (selon le mÃªme principe) $m=n^p$ puis le rÃ©sultat est $n \times m \times m$.
 \end{itemize}
 
 \begin{enumerate}
-\item Ecrire l'algorithme récursif \verb|puiss| qui prend en entrée deux entiers positifs $n$ et $k$ et renvoie $n^k$ selon le principe décrit ci-dessus.
-\item Dans le cas du calcul de $n^{18}$ (n positif), combien d'appels seront fait à l'algorithme \verb|puiss| ?
-\item Dans le calcul de $n^k$ avec $k=2^p$, combien d'appels seront fait à l'algotithme \verb|puiss| (la réponse dépend bien sûr de p).
+\item Ecrire l'algorithme rÃ©cursif \verb|puiss| qui prend en entrÃ©e deux entiers positifs $n$ et $k$ et renvoie $n^k$ selon le principe dÃ©crit ci-dessus.
+\item Dans le cas du calcul de $n^{18}$ (n positif), combien d'appels seront fait Ã  l'algorithme \verb|puiss| ?
+\item Dans le calcul de $n^k$ avec $k=2^p$, combien d'appels seront fait Ã  l'algotithme \verb|puiss| (la rÃ©ponse dÃ©pend bien sÃ»r de p).
 \end{enumerate}
 
 \begin{solution}
 \begin{enumerate}
-\item Voici la fonction (codé en C)
+\item Voici la fonction (codÃ© en C)
 \begin{verbatim}
 int puiss(int n, int k) {
   int m; 
@@ -237,28 +238,28 @@ int puiss(int n, int k) {
 }
 \end{verbatim}
 
-\item  Voici la liste des appels à la fonction \verb|puiss| : \verb|puiss(n,18)| appelle \verb|puiss(n,9)| qui appelle \verb|puiss(n,4)| qui appelle \verb|puiss(n,2)|  qui appelle \verb|puiss(n,1)| qui apelle \verb|puiss(n,0)|. Au total : 6 appels.
+\item  Voici la liste des appels Ã  la fonction \verb|puiss| : \verb|puiss(n,18)| appelle \verb|puiss(n,9)| qui appelle \verb|puiss(n,4)| qui appelle \verb|puiss(n,2)|  qui appelle \verb|puiss(n,1)| qui apelle \verb|puiss(n,0)|. Au total : 6 appels.
 
-\item Pour calculer $n^k$ avec $k=2^p$. La fonction \verb|puiss(n,k)| apelle \verb|puiss(n,k')| avec $k'=2^p/2=2^{p-1}$. Le p se décrémente de 1 à chaque appel jusqu'à appel avec $k=2^0=1$. Il y a donc au total p+1 appels. (Pour p=1, on appelle 2 fois la fonction et ensuite on fait un appel supplémentaire à chaque fois que p est incrémenté de 1).
+\item Pour calculer $n^k$ avec $k=2^p$. La fonction \verb|puiss(n,k)| apelle \verb|puiss(n,k')| avec $k'=2^p/2=2^{p-1}$. Le p se dÃ©crÃ©mente de 1 Ã  chaque appel jusqu'Ã  appel avec $k=2^0=1$. Il y a donc au total p+1 appels. (Pour p=1, on appelle 2 fois la fonction et ensuite on fait un appel supplÃ©mentaire Ã  chaque fois que p est incrÃ©mentÃ© de 1).
 \end{enumerate}
 \end{solution}
 
 
 \exercice{}
 
-Le problème des tours de Hanoï est un jeu de réflexion imaginé par le mathématicien français Édouard Lucas, et consistant à déplacer des disques de diamètres différents d'une tour de « départ » à une tour d'« arrivée » en passant par une tour « intermédiaire » et ceci en un minimum de coups, tout en respectant les règles suivantes :
+Le problÃ¨me des tours de HanoÃ¯ est un jeu de rÃ©flexion imaginÃ© par le mathÃ©maticien franÃ§ais Ã‰douard Lucas, et consistant Ã  dÃ©placer des disques de diamÃ¨tres diffÃ©rents d'une tour de Â« dÃ©part Â» Ã  une tour d'Â« arrivÃ©e Â» en passant par une tour Â« intermÃ©diaire Â» et ceci en un minimum de coups, tout en respectant les rÃ¨gles suivantes :
 \begin{itemize}
-    \item on ne peut déplacer plus d'un disque à la fois,
+    \item on ne peut dÃ©placer plus d'un disque Ã  la fois,
     \item  on ne peut placer un disque que sur un autre disque plus grand que lui ou sur un emplacement vide.
 \end{itemize}
-On suppose que cette dernière règle est également respectée dans la configuration de départ.
-On suppose que les trois positions des trois tours sont numérotées 1, 2 et 3.
+On suppose que cette derniÃ¨re rÃ¨gle est Ã©galement respectÃ©e dans la configuration de dÃ©part.
+On suppose que les trois positions des trois tours sont numÃ©rotÃ©es 1, 2 et 3.
 
-Ecrire un algorithme qui prend en entrée $n$ le nombre de disque sur
-la tour, $dep$ la position de la tour de départ, $med$ la position de
-la tour intermédiaire, et $fin$ la position finale. Cet algorithme ne renvoie rien mais  affiche les déplacement successifs sous forme d'un couple d'entier $(a,b)$ qui signifie qu'on déplace le disque au dessus de la tour $a$ sur la tour $b$.
+Ecrire un algorithme qui prend en entrÃ©e $n$ le nombre de disque sur
+la tour, $dep$ la position de la tour de dÃ©part, $med$ la position de
+la tour intermÃ©diaire, et $fin$ la position finale. Cet algorithme ne renvoie rien mais  affiche les dÃ©placement successifs sous forme d'un couple d'entier $(a,b)$ qui signifie qu'on dÃ©place le disque au dessus de la tour $a$ sur la tour $b$.
 
-Exemple : les mouvements nécessaires pour déplacer 3 disques de $1$ vers $3$ en passant par $2$ :
+Exemple : les mouvements nÃ©cessaires pour dÃ©placer 3 disques de $1$ vers $3$ en passant par $2$ :
 \begin{itemize}
 \item (1,3)
 \item (1,2)
