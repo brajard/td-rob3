@@ -3,13 +3,12 @@
 \usepackage{algorithmic}
 \usepackage[latin1]{inputenc}
 \usepackage{fancyhdr}
-\usepackage{fancyvrb}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{babel}
 \usepackage{amsfonts}
 \usepackage{graphicx}
-%\usepackage{here}
+\usepackage{here}
 \usepackage{ifthen}
 \usepackage{xcomment}
 \usepackage{array}
@@ -25,16 +24,18 @@
 \topmargin0.5cm
 \oddsidemargin0.5cm
 \evensidemargin0.5cm
-\DefineShortVerb{\|}
+
 \makeatletter
 \@addtoreset{section}{part}
 \makeatother
 \newlength{\mylength}
 \newcounter{exo}\stepcounter{exo}
+
 \newcommand\exercice[1]{
 \subsubsection*{Exercice \theexo\stepcounter{exo} {#1}}
 %{\bf Exercice \theexo\stepcounter{exo}\\}
 }
+
 
 
 \RequirePackage{layout,color}
@@ -103,13 +104,16 @@ $\displaystyle }l<{$\end{lrbox}%
 \let\Examplebox\examplebox
 \let\endExamplebox\endexamplebox
 
+\widowpenalty 10000
+\clubpenalty 10000
+\raggedbottom
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newboolean{sol}
-%\setboolean{sol}{true}
-\setboolean{sol}{false}
+%\setboolean{sol}{false}
+\setboolean{sol}{true}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
@@ -141,9 +145,9 @@ $\displaystyle }l<{$\end{lrbox}%
 
 \begin{document}
 
-\lhead[ROB3/MAIN3]{ROB3/MAIN3}
+\lhead[ROB3/MAIN3 ]{ROB3/MAIN3 }
 \chead[]{}
-\rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
+\rhead[Informatique Générale ]{Informatique Générale}
  
 \ifthenelse{\boolean{sol}}
 {
@@ -151,7 +155,7 @@ $\displaystyle }l<{$\end{lrbox}%
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2016-2017 (version étudiants)]{Polytech'Paris-UPMC 2016-2017 (version étudiants)}
 }
 
 \cfoot[]{}
@@ -163,198 +167,191 @@ $\displaystyle }l<{$\end{lrbox}%
 \pagestyle{fancyplain}
 %%%%%%%%%%%%
 
- %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+ %\addcontentsline{toc}{chapter}{Série 1 : Conception d'algorithmes}
  %\chapter{Conception d'algorithmes}
- %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
+ %\addcontentsline{toc}{chapter}{Série 1 : Conception d'algorithmes}
 
-\chapter*{Travaux Pratiques n°3}
-
-L'ensemble des exercices de ce TP pourra être réalisé dans un même fichier \texttt{.c}.
-
-\exercice{}
-
-Ecrire et tester une fonction \texttt{void affiche\_tab(int tab[], int n)} qui affiche à l'écran les n premiers éléments du tableau d'entiers \texttt{tab}. Si le tableau est de taille \texttt{n}, la fonction affichera l'ensemble des éléments de \texttt{tab}.
-
-\begin {solution}
-\begin {verbatim}
-void affiche_tab(int tab[],int n) {
-  int i;
-  for (i=0;i<n;i++) {
-     printf("%4d ",tab[i]);
-     }
-  printf("\n");
-}
-\end{verbatim}
-\end{solution}
-
-\exercice{}
-
-Ecrire et tester une fonction \texttt{void init\_tab(int max, int tab[], int n)} qui initialise les n premiers éléments du tableau d'entiers \texttt{tab} à des valeurs aléatoires comprises entre \texttt{0} et \texttt{max-1}. Si le tableau est de taille \texttt{n}, la fonction initialisera l'ensemble des éléments de \texttt{tab}. 
+\chapter*{Travaux Pratiques n°4}
 
 \exercice {}
-Ecrire une fonction \verb|void ech(int tab[],int i, int j)| qui échange l'élément d'indice i et l'élément d'indice j dans le tableau \verb|tab|.
 
-
-\exercice{(Tri par sélection)}
-
-Ecrire et tester une fonction   \texttt{void tri\_selec(int tab[], int n)} qui implémente l'algorithme de tri par sélection basé sur le principe suivant :
-On sélectionne tout d'abord l'élément le plus petit du tableau, c.à d. on trouve l'entier 
-$p$ tel que $\forall 0 \leq i \le n, t[i] \geq t[p]$. Une fois cet emplacement trouvé, on échange les élements 
-$t[0]$ et $t[p]$. Puis on recommence ces opérations pour le reste du tableau (c.à d. les éléments 
-compris entre les indices $1$ et $n-1$. On recherche alors le plus petit élément de cette nouvelle suite 
-de nombre et on échange avec $t[1]$. Et ainsi de suite  jusqu'au moment où on a placé tous les 
-élements du tableau.
-\verb|n| représente le nombre d'éléments à trier.
-
-
+Écrire un algorithme récursif qui affiche l'écriture inverse d'un
+entier donné en entrée (par exemple si on entre -2344, on obtiendra l'affichage -4432).
 \begin{solution}
 \begin{verbatim}
-for (i = 0; i < N - 1; i++) {
+#include <stdio.h>
 
-            minIndex = i;
+void inversion (int nb);
 
-            for (j = i + 1; j < N; j++)
+void inversion (int nb)
+{
+  if (nb < 0)
+    {
+      printf("-");
+      return inversion (-nb);
+    }
+  if (nb < 10)
+    {
+      printf("%d",nb);
+    }
+  else 
+    {
+      printf ("%d",nb % 10);
+      return inversion (nb/10);
+    }
+}
 
-                  if (arr[j] < arr[minIndex])
-
-                        minIndex = j;
-
-            if (minIndex != i) {
-
-                  tmp = arr[i];
-
-                  arr[i] = arr[minIndex];
-
-                  arr[minIndex] = tmp;
-
-            }
-
-      }
-\end{verbatim}
-
-\end{solution}
-
-
-\exercice{(Tri à bulle)}
-
-Ecrire une fonction   \texttt{void tri\_bulle(int tab[], int n)}qui implémente l'algorithme de tri à bulle.  \verb|n| représente le nombre d'éléments à trier.
-
-Le principe du tri à bulle est de comparer successivement tous les éléments adjacents d'un tableau (en commençant par le premier) et de les échanger si 
-l'élément d'indice $i$ est supérieur à l'élément d'indice $i+1$. On recommence cette opération tant que tous les éléments ne sont pas triés.
-
-\begin{solution}
-\begin{verbatim}
-
-while (echange) {
-
-            echange = 0;
-
-            j++;
-
-            for ( i = 0; i < N - j; i++) {
-
-                  if (arr[i] > arr[i + 1]) {
-
-                        tmp = arr[i];
-
-                        arr[i] = arr[i + 1];
-
-                        arr[i + 1] = tmp;
-
-                        echange = 1;
-
-                  }
-
-            }
-
-      }
-\end{verbatim}
-
-\end{solution}
-
-
-\exercice{(Tri par insertion)}
-Ecrire une fonction   \texttt{void tri\_insertion(int tab[], int n)}qui implémente l'algorithme de tri par insertion.  \verb|n| représente le nombre d'éléments à trier.
-
-Le tri par insertion consiste à prendre l'élément se trouvant juste après la partie 
-déjà triée du tableau et de trouver sa place dans cette dernière (insertion). Le premier élément 
-à insérer est le deuxième élément du tableau, le premier étant forcément déjà  trié puisqu'il 
-est tout seul. On recommence ce procédé jusqu'au dernier élément du tableau.
-\begin{solution}
-\begin{verbatim}
-void tri_insert(int tab[],int n) {
-  int p;
-  int j;
-  int k;
-  for (j=1;j<n;j++) {
-    p=tab[j];
-    k=j-1;
-    while(k>=0 && tab[k]>p)
-      {
-	tab[k+1]=tab[k];
-	k--;
-      }
-      tab[k+1]=p;
-
-  }
+int main(void)
+{
+  int nb;
+  printf ("Entrer un nombre\n");
+  scanf ("%d",&nb);
+  
+  inversion (nb);
+  printf("\n");
+  return 0;
 }
 \end{verbatim}
-
 \end{solution}
 
-\exercice{(Duplication de tableaux)}
-Ecrire un programme C  \texttt{void copy\_tab(int tabin[], int tabout[], int n)} qui copie les \verb|n| premières
-valeurs
-du tableau \verb|tabin| dans le tableau \verb|tabout|.
-
-\exercice{(Comparaison des méthodes de tri implémentées)}
-
-
-
-On va ensuite exécuter chacun des algorithmes de tri sur un tableau et comparer le temps mis par chacun des algorithmes de tri précédents. 
-
-Pour donner une idée, on prendra un tableau de taille 50000 contenant des entiers entre 0 et 20000. On pourra ensuite faire varier la taille des tableaux pour voir l'évolution du temps pris par les algorithmes en fonction de la taille.
-
-On pourra alors tracer un graphique du temps en fonction de la taille N. Quelle courbe obtient-on ?
-
-Pour mesurer le temps (en secondes) d'exécution d'une séquence d'instruction, on utilise la bibliothèque \texttt{time.h}. On déclare une variable \texttt{p} de type \texttt{double} et deux variables \texttt{start} et \texttt{end} de type \texttt{clock\_t} :
+\exercice{ -- Problème \og Couicable\fg}
+\begin{enumerate}
+\item Écrire une fonction {\tt nbDeChiffres(x)} qui retourne le nombre de 
+chiffres composant un entier $x$ transmis en arguments.
+\begin{solution}
 \begin{verbatim}
-double p;
-clock_t start, end ;
+int nbDeChiffres(int x){
+   int nbChiffres=0;
+   if (x == 0) // cas delicat : x est le nombre 0
+      return 1;
+   else {
+      while (x > 0) {
+         nbChiffres ++;
+         x /= 10;
+      }
+      return nbChiffres;
+   }
+}
 \end{verbatim}
- Au début et à la fin de la séquence d'instruction (ici séquence permettant de trier le tableau), on consulte l'horloge de l'ordinateur :
-\begin{verbatim}
-start=clock();
-//Début de la séquence d'instruction
-(...)
-//Fin de la séquence d'instruction
-end=clock();
-\end{verbatim}
+\end{solution}
 
-On calcule et affiche la différence en secondes :
-
-\begin{verbatim}
-p=(double) (end - start) / CLOCKS_PER_SEC ;
-printf("Le temps d'execution est : %lf secondes\n",p);
-\end{verbatim}
-
-\textbf{Attention :} Afin que l'estimation du temps de chaque tri soit significative, il convient de faire la moyenne sur plusieurs tris pour chacune des méthodes, et de trier toujours le même tableau lorsqu'on compare deux méthodes.
+\item Écrire une fonction {\tt extraitNombre(x,n,lg)} qui extrait de $x$ entier positif, à 
+partir du énième chiffre en partant de la droite, le nombre composé de $lg$ 
+chiffres. Elle renvoie -1 si les entrées ne sont pas correctes.\\
+Exemple 1, {\tt extraitNombre(45863047,4,3)} renvoie 586.\\
+Exemple 2, {\tt extraitNombre(45863047,6,4)} renvoie -1.\\
 
 \begin{solution}
-Voici, pour donner un ordre d'idée des temps des tris les uns par
-rapport aux autres, les résulats des tris sur un tableau de taille
-N=50000 contenant des entiers entre 1 et MAX=200000.
+{\scriptsize
+\begin{verbatim}
+int extraitNombre(int x, int n, int lg){
+   int puiss=1;
 
-Le temps d'execution de tri a bulle est : 10.170000 secondes
+   // Etape 0 : verifier que l'operation est realisable (etape facultative)
+   if ((n > nbDeChiffres(x)) || (lg > nbDeChiffres(x)) || ((n+lg) > nbDeChiffres(x)))
+      return -1;
+   if (n<0 || x<0 || log <0)
+      return -1;
 
-Le temps d'execution de tri par selection est : 3.730000 secondes
+   // Etape 1 : enlever les n derniers chiffres de x
+   while (n>0) {
+      x /= 10;
+      n --;
+   }
 
-Le temps d'execution de tri par insertion est : 4.290000 secondes
-
-%Le temps d'execution du tri par shell est : 0.020000
-
+   // Etape 2 : garder les lg derniers chiffres du "nouveau" x
+   while (lg > 0) {
+      puiss *= 10;
+      lg --;
+   } 
+   x %= puiss;
+   return x;
+} 
+\end{verbatim}
+}
 \end{solution}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\item Écrire une fonction {\tt estPair(x)} qui renvoie 1 si le nombre de chiffres de $x$ est pair, 0 sinon.
+\begin{solution}
+\begin{verbatim}
+int estPair(x){
+   if ((nbDeChiffres(x) % 2) == 0) 
+      return 1;
+   else return 0;
+}
+\end{verbatim}
+\end{solution}
+
+
+
+\item Écrire une fonction {\tt sommeDesChiffres(x)} qui renvoie la somme des 
+chiffres composant le nombre $x$ transmis en arguments
+\begin{solution}
+\begin{verbatim}
+int sommeDesChiffres(int x){
+   int somme=0;
+
+   while (x > 0) {
+      somme += x%10;
+      x /= 10;
+   }
+   return somme;
+}
+\end{verbatim}
+\end{solution}
+
+\item Un nombre $x$ est dit \textit{couicable} si la somme des chiffres de sa partie 
+droite est égale à la somme des chiffres de sa partie gauche. Le nombre de 
+chiffres composant le nombre étudié doit être pair. Par exemple, 256823 est 
+couicable. \\
+Écrire la fonction {\tt estCouicable(x)} qui affiche si $x$, 
+transmis en arguments, est un nombre couicable ou non.  
+\begin{solution}
+{\footnotesize
+\begin{verbatim}
+void estCouicable(int x){
+   int gauche, droite, nbChiffres, puiss=1;
+
+   if (!estPair(x))
+      printf("\n%d n'est pas couicable : nombre de chiffres impair",x);
+   else {
+      // On reccupere les parties droite et gauche de x
+      nbChiffres = nbDeChiffres(x);
+      droite = extraitNombre(x,0,nbChiffres/2);
+      gauche = extraitNombre(x,nbChiffres/2,nbChiffres/2);
+      if (sommeDesChiffres(droite) != sommeDesChiffres(gauche))
+         printf("\n%d n'est pas couicable",x);
+      else
+         printf("\n%d est couicable",x);
+   }
+}
+\end{verbatim}
+}
+\end{solution}
+\end{enumerate}
+
+\exercice{}
+Écrire une fonction qui prend en entrée deux chaînes de caractères \verb|s1| et \verb|s2| et modifie \verb|s1| de façon à supprimer la sous-chaîne \verb|s2|. Si \verb|s2| n'est pas incluse dans \verb|s1|, la fonction ne modifie pas \verb|s1|. Si \verb|s2| est présente plusieurs fois dans \verb|s1|, on supprime chaque occurence.
+
+\exercice{}
+Les parenthèses permettent, par exemple, de changer la priorité des opérations dans une expression algébrique.
+Ex : $(a+2*(x-y))*(b+2)$. Si les parenthèses permettent de définir une expression algébrique valide, on dit alors que l'expression est bien parenthésée. Dans le cas contraire, l'expression est dite mal parenthésée. Le but de cet exercice est d'écrire un programme permettant de tester la validité des parenthèses dans une expression algébrique.
+\begin{enumerate}
+\item Une expression est considérée comme une chaîne de
+  caractères. Une première étape est de supprimer les caractères de
+  l'expression. Par exemple l'expression donnée précédemment devient :
+  $(())()$.  Écrire une fonction qui prend une expression algébrique en entrée et renvoie un tableau de caractères ne contenant que les parenthèses (ce tableau sera un tableau statique passé en entrée qui sera modifié par la fonction). \\
+\item Dire si les expressions suivantes sont bien ou mal parenthésées. Dans le cas où elles sont mal parenthésées, expliquer pourquoi :
+\begin{itemize}
+\item $()(())$
+\item $()))$
+\item $())(()$
+\end{itemize}
+\item Proposer une fonction prenant en entrée un tableau de caractères
+  ne contenant que des parenthèses et renvoyant 1  si l'expression est
+  bien parenthésée, 0 si elle est mal parenthésée.\\
+\item Proposer une fonction prenant en entrée un tableau de caractères T ne contenant que des parenthèse et renvoyant la plus longue expression bien parenthésée contenue dans T.\\
+
+\end{enumerate}
 
 \end{document}
