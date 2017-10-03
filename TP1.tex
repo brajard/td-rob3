@@ -167,17 +167,17 @@ numbers=left,                    % where to put the line-numbers; possible value
 
 \begin{document}
 
-\lhead[ROB3 ]{ROB3 }
+\lhead[ROB3/MAIN3 ]{ROB3/MAIN3 }
 \chead[]{}
 \rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version enseignants)]{Polytech'Paris-UPMC 2016-2017 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2017-2018 (version enseignants)]{Polytech'Paris-UPMC 2017-2018 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2017-2018 (version \'etudiants)]{Polytech'Paris-UPMC 2017-2018 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -193,7 +193,7 @@ numbers=left,                    % where to put the line-numbers; possible value
  %\chapter{Conception d'algorithmes}
  %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
 
-\chapter*{Travaux Pratiques n°1}
+\chapter*{Travaux Pratiques thème 1 : boucles/structures de contôle}
 
 \iffalse
 \exercice{- Paramétrer son navigateur internet}
@@ -265,7 +265,7 @@ Notez que le \textbf{pc57} n'est que le point d'entrée dans le réseau polytech. 
 
 \verb|gedit hello.c &| (n'oubliez pas le \verb|&|).
 
-ou
+ou (mieux)
 
 \verb|emacs hello.c &|
 \end{enumerate}
@@ -421,47 +421,19 @@ if ( (a>0) && (b>0) )
 	\lstinputlisting{fizzbuzz.c}
 \end{solution}
 
-\exercice{}
-On souhaite écrire un programme qui lit un nombre hexadécimal comme une suite de caractères, vérifie sa validité et effectue la conversion décimale. L'itération s'arrêtera quand on lira un caractère ne représentant pas un chiffre hexadécimal, et on calculera la valeur au fur et à mesure.
 
-\begin{itemize}
-	\item Écrire en pseudo-code l'algorithme
-	\item Écrire le code \texttt{C} correspondant
-\end{itemize}
+\exercice{Retour des fractions egyptiennes}
+Codez en C la résolution de l'exercice sur les fractions égyptiennes.
+Dans le cas où votre programme fait des calculs avec des \texttt{float}, qu'observez-vous ? Pourquoi ?
 
-
+\exercice {Suite de Fibonacci}
+La suite de Fibonacci est définie de manière récursive par la relation : $u_n = u_{n-1} + u_{n-2}$.\\
+Cette définition doit être complétée par une condition initiale. Dans notre cas, si n est égal à 0 ou 1 alors : $u_0=u_1=1$.\\
+Ecrire le programme qui calcule le n-ième terme d'une suite de Fibonacci (La valeur de est entrée au clavier).
 \begin{solution}
-
-\begin{itemize}
- 
-	\item Algorithme
-\begin{verbatim}
- lire(c)
-
- Tant que c est valide faire
-	nb <- nb*16
-
-	si '0' <= c <= '9' alors
-		nb <- nb + (c - '0')
-	sinon si 'a' <= c <= 'f' alors
-		nb <- nb + (c - 'a' + 10)
-	sinon
-		nb <- nb + (c - 'A' + 10)
-	finsi
-	
-	lire(c)
- FinTantQue
-\end{verbatim}
-puis (approche descendante)
-\begin{verbatim}
- "c est valide" s'écrit (c>='0' et c<='9') ou
-  (c>='a' et c<='f') ou (c>='A' et c<='F')
-\end{verbatim}
-	\item le code:
-	{\lstinputlisting{conversionHexa.c}}
-\end{itemize}
-
+\lstinputlisting{fibo_seq.c}
 \end{solution}
+
 
 %\exercice{}
 %Ecrire le programme qui énumère les diviseurs d'un entier $n$
@@ -478,73 +450,105 @@ puis (approche descendante)
 %\end{solution}
 
 
-%\exercice{}
-%Écrire le programme C du jeu qui fabrique un nombre au hasard entre 1
-%et 100, et le fait ensuite deviner à l'utilisateur. Celui-ci propose une valeur et
-%l'ordinateur répond trop petit ou trop grand jusqu'à ce qu'il trouve la bonne
-%réponse. \\
-%Modifiez ensuite le programme pour qu'il affiche le nombre de coups. 
-%
-%Aide: utiliser la fonction \texttt{rand()} qui génére un nombre entier aléatoire compris entre \texttt{0} et \texttt{RAND\_MAX}. Pour utiliser cette fonction il faut ajouter \texttt{\#include <stdlib.h>} au début de votre fichier.
-%
-%\begin{solution}
-%
-%\begin{lstlisting}
-%#include <stdio.h>
-%#include <stdlib.h>
-%/* Fonction principale */
-%
-%
-%int main(void)
-%{
-%  int n;
-%  int l;
-%  int linf,lsup;
-%  int cnt;
-%  n=rand()%100;
-%  l=-1;
-%  cnt=0;
-%  linf=0;
-%  lsup=100;
-%  while(l!=n)
-%    {
-%      cnt++;   
-%      printf("\nEntrez un nombre entre %d et %d : ",linf,lsup);
-%      scanf("%d",&l);
-%	if (l<n)
-%	  {
-%	    printf("\n Le nombre à trouver est plus grand");
-%	    linf=l;
-%	  }
-%      if(l>n)
-%	{
-%	  printf("\n Le nombre à trouver est plus petit");
-%	  lsup=l;
-%	}
-%    }
-%  printf("\n Vous avez trouvé le bon nombre : %d en %d essais\n",n,cnt);
-%  return(0);
-%} 
-%\end{lstlisting}
-%\end{solution}
+\exercice{}
+Écrire le programme C du jeu qui fabrique un nombre au hasard entre 1
+et 100, et le fait ensuite deviner à l'utilisateur. Celui-ci propose une valeur et
+l'ordinateur répond trop petit ou trop grand jusqu'à ce qu'il trouve la bonne
+réponse. \\
+Modifiez ensuite le programme pour qu'il affiche le nombre de coups. 
 
+Aide: utiliser la fonction \texttt{rand()} qui génére un nombre entier aléatoire compris entre \texttt{0} et \texttt{RAND\_MAX}. Pour utiliser cette fonction il faut ajouter \texttt{\#include <stdlib.h>} au début de votre fichier.
 
-
-
-%\exercice {Traitement d'un entier}
-%
-%Ecrire programme qui affiche le nombre de chiffres 1 contenu dans
-%un entier entré au clavier. Par exemple, pour $n=1151$, le programme affichera $3$.
-%\begin{solution}
-%\lstinputlisting{nbocc.c}
-%\end{solution}
-
-\exercice {Suite de Fibonacci}
-La suite de Fibonacci est définie de manière récursive par la relation : $u_n = u_{n-1} + u_{n-2}$.\\
-Cette définition doit être complétée par une condition initiale. Dans notre cas, si n est égal à 0 ou 1 alors : $u_0=u_1=1$.\\
-Ecrire le programme qui calcule le n-ième terme d'une suite de Fibonacci (La valeur de est entrée au clavier).
 \begin{solution}
-\lstinputlisting{fibo_seq.c}
-\end{solution}
-\end{document}
 
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+/* Fonction principale */
+
+
+int main(void)
+{
+ int n;
+ int l;
+ int linf,lsup;
+ int cnt;
+ n=rand()%100;
+ l=-1;
+ cnt=0;
+ linf=0;
+ lsup=100;
+ while(l!=n)
+   {
+     cnt++;   
+     printf("\nEntrez un nombre entre %d et %d : ",linf,lsup);
+     scanf("%d",&l);
+	if (l<n)
+	  {
+	    printf("\n Le nombre à trouver est plus grand");
+	    linf=l;
+	  }
+     if(l>n)
+	{
+	  printf("\n Le nombre à trouver est plus petit");
+	  lsup=l;
+	}
+   }
+ printf("\n Vous avez trouvé le bon nombre : %d en %d essais\n",n,cnt);
+ return(0);
+} 
+\end{lstlisting}
+\end{solution}
+
+
+\exercice {Traitement d'un entier}
+
+Ecrire programme qui affiche le nombre de chiffres 1 contenu dans
+un entier entré au clavier. Par exemple, pour $n=1151$, le programme affichera $3$.
+\begin{solution}
+\lstinputlisting{nbocc.c}
+\end{solution}
+
+
+% \exercice{}
+% On souhaite écrire un programme qui lit un nombre hexadécimal comme une suite de caractères, vérifie sa validité et effectue la conversion décimale. L'itération s'arrêtera quand on lira un caractère ne représentant pas un chiffre hexadécimal, et on calculera la valeur au fur et à mesure.
+
+% \begin{itemize}
+% 	\item Écrire en pseudo-code l'algorithme
+% 	\item Écrire le code \texttt{C} correspondant
+% \end{itemize}
+
+
+% \begin{solution}
+
+% \begin{itemize}
+ 
+% 	\item Algorithme
+% \begin{verbatim}
+%  lire(c)
+
+%  Tant que c est valide faire
+% 	nb <- nb*16
+
+% 	si '0' <= c <= '9' alors
+% 		nb <- nb + (c - '0')
+% 	sinon si 'a' <= c <= 'f' alors
+% 		nb <- nb + (c - 'a' + 10)
+% 	sinon
+% 		nb <- nb + (c - 'A' + 10)
+% 	finsi
+	
+% 	lire(c)
+%  FinTantQue
+% \end{verbatim}
+% puis (approche descendante)
+% \begin{verbatim}
+%  "c est valide" s'écrit (c>='0' et c<='9') ou
+%   (c>='a' et c<='f') ou (c>='A' et c<='F')
+% \end{verbatim}
+% 	\item le code:
+% 	{\lstinputlisting{conversionHexa.c}}
+% \end{itemize}
+
+% \end{solution}
+\end{document}
