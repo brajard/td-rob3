@@ -175,11 +175,11 @@ numbers=left,                    % where to put the line-numbers; possible value
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version enseignants)]{Polytech'Paris-UPMC 2016-2017 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2017-2018 (version enseignants)]{Polytech'Paris-UPMC 2017-2018 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2017-2018 (version \'etudiants)]{Polytech'Paris-UPMC 2017-2018 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -195,7 +195,7 @@ numbers=left,                    % where to put the line-numbers; possible value
  %\chapter{Conception d'algorithmes}
  %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
 
-\chapter*{Travaux Pratiques n° 2}
+\chapter*{Travaux Pratiques thème 2 : Les tableaux statiques}
 
 
 \exercice{}
@@ -290,11 +290,11 @@ vaudront 3).\\
 \item Afficher au début une grille vierge (On affichera autant de caractères \verb|' '| que de cases du tableau.\\
 \item Procéder au tir en :\\
 \begin{itemize}
-\item Demandant au joueur les coordonnées de son tir ;\\
-\item Vérifiant si la case correspondante contient un bateau ;\\
+\item Demandant au joueur les coordonnées de son tir ;
+\item Vérifiant si la case correspondante contient un bateau ;
 \item Affichant la nouvelle grille avec un \verb|'o'| dans la case choisie si celle-ci
-contient un bateau et un \verb|'x'| dans le cas contraire;\\
-\item Retirant un point au joueur si son tir a fait plouf ;\\
+contient un bateau et un \verb|'x'| dans le cas contraire;
+\item Retirant un point au joueur si son tir a fait plouf ;
 \end{itemize}
 \item Recommencer l'opération précédente tant que tous les bâteaux n'ont pas été découverts ou tant 
 que le score n'est pas tombé à zéro.\\
@@ -305,10 +305,6 @@ Affichage des coordonnées sur la grille, rappel du score à chaque étape, bâteaux
 
 \begin{solution}
 \lstinputlisting[lastline=30]{tp3_exo8.c}
-\end{solution}
-
-\begin{solution}
-\lstinputlisting[firstline=31]{tp3_exo8.c}
 \end{solution}
 
 \end{document}
