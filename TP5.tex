@@ -3,6 +3,7 @@
 \usepackage{algorithmic}
 \usepackage[latin1]{inputenc}
 \usepackage{fancyhdr}
+\usepackage{fancyvrb}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{babel}
@@ -21,21 +22,19 @@
 \voffset-2cm
 \hoffset-1cm
 \headsep0.5cm
-
 \topmargin0.5cm
 \oddsidemargin0.5cm
 \evensidemargin0.5cm
-
+\DefineShortVerb{\|}
 \makeatletter
 \@addtoreset{section}{part}
 \makeatother
 \newlength{\mylength}
 \newcounter{exo}\stepcounter{exo}
-\newcommand\exercice{
-\subsubsection*{Exercice \theexo\stepcounter{exo}}
+\newcommand\exercice[1]{
+\subsubsection*{Exercice \theexo\stepcounter{exo} {#1}}
 %{\bf Exercice \theexo\stepcounter{exo}\\}
 }
-
 
 
 \RequirePackage{layout,color}
@@ -109,8 +108,8 @@ $\displaystyle }l<{$\end{lrbox}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newboolean{sol}
-\setboolean{sol}{true}
-%\setboolean{sol}{false}
+%\setboolean{sol}{true}
+\setboolean{sol}{false}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
@@ -158,315 +157,204 @@ $\displaystyle }l<{$\end{lrbox}%
 \cfoot[]{}
 \rfoot[\thepage]{\thepage}
 
-\pagestyle{fancyplain} 
+
+
+
+\pagestyle{fancyplain}
 %%%%%%%%%%%%
 
  %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
  %\chapter{Conception d'algorithmes}
  %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
 
-\chapter*{Travaux Pratiques n°5}
+\chapter*{Travaux Pratiques n°3}
 
-\section*{Pointeurs}
+L'ensemble des exercices de ce TP pourra être réalisé dans un même fichier \texttt{.c}.
 
-\exercice
+\exercice{}
 
-Ecrire une fonction incremente qui prend 3 paramètres en entrée (\textbf{a}, \textbf{b} et \textbf{i}), et qui ajoute à 
-\textbf{a} et \textbf{b} la valeur \textbf{i}. Cette fonction retourne la valeur 1 si \textbf{i} vaut 0, 0 sinon. 
+Ecrire et tester une fonction \texttt{void affiche\_tab(int tab[], int n)} qui affiche à l'écran les n premiers éléments du tableau d'entiers \texttt{tab}. Si le tableau est de taille \texttt{n}, la fonction affichera l'ensemble des éléments de \texttt{tab}.
 
-\begin{solution}
-\begin{verbatim}
-#include <stdio.h> 
-
-int incremente (int *a, int *b, int i) { 
-  *a += i; 
-  *b += i; 
-  if (i) 
-    return 0; 
-  return 1; 
-} 
-
-int main (void){ 
-  int p1, p2, i, retour; 
-  printf("valeur du premier parametre ? "); 
-  scanf("%d", &p1); 
-  printf("valeur du second parametre ? "); 
-  scanf("%d", &p2); 
-  printf("increment ? "); 
-  scanf("%d", &i); 
-  printf("Avant appel : param1 = %d, param2 = %d, increment = %d\n", p1, p2, i); 
-  retour = incremente(&p1, &p2, i); 
-  printf("Apres appel : param1 = %d, param2 = %d, increment = %d\n", p1, p2, i); 
-  printf("retour de lÕappel = %d\n", retour); 
-  return 0; 
-} 
-\end{verbatim}
-\end{solution}
-
-
-
-\exercice
-
-Ecrire le code C permettant de créer un tableau \textbf{tab} de 17 entiers en utilisant un pointeur et la fonction malloc. 
-Libérer ensuite la mémoire allouée au tableau avec la fonction free.
-
-
-
-\begin{solution}
-\begin{verbatim}
-#include <stdio.h> 
-#include <stdlib.h> 
-
-int main(void) { 
-  int * tab; 
-  
-  tab = (int *) malloc(17 * sizeof(int)); 
-
-  free(tab); 
-  
-  return 0; 
-} 
-
-
-\end{verbatim}
-\end{solution}
-
-
-
-\exercice
-
-Ecrire le code C permettant de créer un tableau \textbf{tab} à deux dimensions de 15 lignes et 17 colonnes entiers en utilisant un pointeur et la fonction malloc.
-Libérer ensuite la mémoire allouée au tableau avec la fonction free.
-
-
-
-\begin{solution}
-\begin{verbatim}
-#include <stdio.h> 
-#include <stdlib.h> 
-
-int main(void) 
-{ 
-  int ** tab; 
-  int i; 
-  
-  tab = (int **) malloc(15 * sizeof(int *)); 
-  for (i = 0; i < 15; i++) { 
-    tab[i] = (int *) malloc(17 * sizeof(int)); 
-  }
- 
-  for (i = 0; i < 15; i++) { 
-    free(tab[i]); 
-  } 
-  free(tab); 
-  
-  return 0; 
-} 
-
-\end{verbatim}
-\end{solution}
-
-
-\section*{Tableaux et Matrices}
-
-
- \exercice
-\begin{itemize}
-\item Ecrire une fonction qui demande à l'utilisateur le nombre de lignes et de 
-colonnes d'une matrices d'entiers, puis remplit la matrice en demandant les 
-valeurs à l'utilisateur.
-
-\item Ecrire une fonction {\tt affiche\_mat(m,l,c)} qui permet d'afficher une 
-matrice m de {\tt l} lignes et {\tt c} colonnes.
-\end{itemize}
-
-\begin{solution}
-\begin{verbatim}
-int **saisir()
-{
-	int i, j, lig, col, **m;
-
-	printf("Entrer le nb de lignes et de colonnes\n");
-   scanf("%d %d",&lig,&col);
-	for(i=0;i<lig;i++)
-		for(j=0;j<col;j++)
-		{
-			printf("Entrer l'element M(%d,%d) : ",i,j);
-			scanf("%d",&m[i][j]);
-		}
-   return m;
-}
-
-afficher(int **mat, int col, int lig)
-{
-	int i, j;
-
-	for(i=0;i<lig;i++)
-	{
-		for(j=0;j<col;j++)
-			printf("%d ",mat[i][j]);
-		printf("\n");
-	}
-}
-\end{verbatim}
-\end{solution}
-
-\exercice
-
- Ecrire une fonction permettant de multiplier deux matrices. On n'oubliera 
-pas de
-traiter les cas d'erreur.
-
-
-\begin{solution}
-{\scriptsize
-\begin{verbatim}
-
-
-
-multiplication(int **mat1, int col1, int lig1, int **mat2, int col2, int lig2,
-int **mat_res){
-   int i, j, k, s;
-
-   if((col1 == lig2) && (lig1 == col2))
-      for(i=0;i<lig1;i++)
-         for(j=0;j<col2;j++){
-            s = 0;
-            for(k=0;k<col1;k++)
-               s = s + mat1[i][k] * mat2[k][j];
-            mat_res[i][j] = s;
-         }
-   else{
-      printf("erreur les deux matrices n'ont pas les bonnes tailles\n");
-      exit(0);
-   }
-}
-
-\end{verbatim}
-}
-\end{solution}
-
-\newpage
-\exercice
-Le but de cet exercice est de calculer le déterminant d'une matrice carrée $n \times n$.
-\begin{enumerate}
-\item Programmer une fonction qui prends une matrice carrée ($n>1$) en entrée et deux entiers $i$ et $j$ et qui renvoie la même matrice privée de la ligne $i$ et de la colonne $j$.
-\item Programmer la fonction \texttt{det} en utilisant la formule suivante : 
-\begin{equation}
-det(M)=\sum_{i=1}^{n}(m_{ij} \times Cof_{i,j})
-\end{equation}
-dans laquelle $m_{ij}$ est le terme de ligne $i$ et de colonne $j$ de la matrice $M$, et $Cof_{i,j}$ est égal à $-1^{i+j}$ multiplié par le déterminant de la matrice $M$ privée de la ligne $i$ et de la colonne $j$.
-
-On notera que le déterminant d'une matrice M de taille $1 \times 1$ est égale à la valeur contenue dans la matrice.
-\end{enumerate}
-
-\begin{solution}
-
-Le code de cette solution est très moche (désolé), mais il fonctionne et contient les fonctionnalité utiles. la fonction \texttt{m1} calcule $-1^{i+j}$.
-Pour info, le déterminant de la matrice écrite dans la solution est 152.
-
-\begin{verbatim}
-#include <stdlib.h>
-#include <stdio.h>
-void affiche(float **M,int n)
-{
-  int i,j;
-  for (i=0;i<n;i++) {
-    for(j=0;j<n;j++) {
-      printf("%f\t",M[i][j]);
-    }
-    printf("\n");
-  }
-}
-float ** init (int n)
-{
-  int i; 
-  float **M;
-  M=(float **)malloc(n*sizeof(float));
-  for (i=0;i<n;i++)
-    {
-      M[i]=(float *)malloc(n*sizeof(float));
-    }
-  return M;
-}
-int m1 (int i,int j)
-{
-  if ((i+j) % 2 == 0) return (1);
-  else return (-1);
-}
-
-float ** extract (float **M,int n,int i,int j)
-{
-  int ii,jj,l=-1,c=-1;
-  int ii,jj;
-  float **Me;
-  Me=init(n-1);
-  for(ii=0;ii<n;ii++) {
-    if (ii!=i) {
-      l++;c=-1;
-      for (jj=0;jj<n;jj++) {
-	if (jj!=j)
-	  {
-	    c++;
-	    Me[l][c]=M[ii][jj];
-	  }
-      }
-    }
-  }
-  return(Me);
-}
-\end{verbatim}
-\end{solution}
-
-%\newpage
-\begin{solution}
-(suite)
-\begin{verbatim}
-float det(float **M,int n)
-{
-  int j=0;
+\begin {solution}
+\begin {verbatim}
+void affiche_tab(int tab[],int n) {
   int i;
-  float D=0;
-  
-  if (n==1)
-    {
-      return M[0][0];
-    }
-  else
-    {
-      for (i=0;i<n;i++)
-	{
-	  printf("\nn=%d,D=%f\n,m1=%d",n,D,m1(i,j));
-	  D += M[i][j]*m1(i,j) * det(extract(M,n,i,j),n-1);
-       }
-      return(D);
-    }
+  for (i=0;i<n;i++) {
+     printf("%4d ",tab[i]);
+     }
+  printf("\n");
 }
-
-int main()
-{
-
-  float **M;
-  //float **Me;
-  float Ms[4][4]={{1,2,3,4},{10,20,11,21},{21,24,27,29},{12,14,15,16}};
-  int i,j;
-  M=init(4);
- for(i=0;i<4;i++) {
-   for(j=0;j<4;j++) {
-     M[i][j]=Ms[i][j];
-   }
- }
-  
- affiche(M,4);
- printf("\n-------------------------\n");
- //Me=extract(M,4,0,0);
- printf("\nDéterminant=%f\n",det(M,4));
-
-  
-
-  return(0);
-}
-
 \end{verbatim}
 \end{solution}
+
+\exercice{}
+
+Ecrire et tester une fonction \texttt{void init\_tab(int max, int tab[], int n)} qui initialise les n premiers éléments du tableau d'entiers \texttt{tab} à des valeurs aléatoires comprises entre \texttt{0} et \texttt{max-1}. Si le tableau est de taille \texttt{n}, la fonction initialisera l'ensemble des éléments de \texttt{tab}. 
+
+\exercice {}
+Ecrire une fonction \verb|void ech(int tab[],int i, int j)| qui échange l'élément d'indice i et l'élément d'indice j dans le tableau \verb|tab|.
+
+
+\exercice{(Tri par sélection)}
+
+Ecrire et tester une fonction   \texttt{void tri\_selec(int tab[], int n)} qui implémente l'algorithme de tri par sélection basé sur le principe suivant :
+On sélectionne tout d'abord l'élément le plus petit du tableau, c.à d. on trouve l'entier 
+$p$ tel que $\forall 0 \leq i \le n, t[i] \geq t[p]$. Une fois cet emplacement trouvé, on échange les élements 
+$t[0]$ et $t[p]$. Puis on recommence ces opérations pour le reste du tableau (c.à d. les éléments 
+compris entre les indices $1$ et $n-1$. On recherche alors le plus petit élément de cette nouvelle suite 
+de nombre et on échange avec $t[1]$. Et ainsi de suite  jusqu'au moment où on a placé tous les 
+élements du tableau.
+\verb|n| représente le nombre d'éléments à trier.
+
+
+\begin{solution}
+\begin{verbatim}
+for (i = 0; i < N - 1; i++) {
+
+            minIndex = i;
+
+            for (j = i + 1; j < N; j++)
+
+                  if (arr[j] < arr[minIndex])
+
+                        minIndex = j;
+
+            if (minIndex != i) {
+
+                  tmp = arr[i];
+
+                  arr[i] = arr[minIndex];
+
+                  arr[minIndex] = tmp;
+
+            }
+
+      }
+\end{verbatim}
+
+\end{solution}
+
+
+\exercice{(Tri à bulle)}
+
+Ecrire une fonction   \texttt{void tri\_bulle(int tab[], int n)}qui implémente l'algorithme de tri à bulle.  \verb|n| représente le nombre d'éléments à trier.
+
+Le principe du tri à bulle est de comparer successivement tous les éléments adjacents d'un tableau (en commençant par le premier) et de les échanger si 
+l'élément d'indice $i$ est supérieur à l'élément d'indice $i+1$. On recommence cette opération tant que tous les éléments ne sont pas triés.
+
+\begin{solution}
+\begin{verbatim}
+
+while (echange) {
+
+            echange = 0;
+
+            j++;
+
+            for ( i = 0; i < N - j; i++) {
+
+                  if (arr[i] > arr[i + 1]) {
+
+                        tmp = arr[i];
+
+                        arr[i] = arr[i + 1];
+
+                        arr[i + 1] = tmp;
+
+                        echange = 1;
+
+                  }
+
+            }
+
+      }
+\end{verbatim}
+
+\end{solution}
+
+
+\exercice{(Tri par insertion)}
+Ecrire une fonction   \texttt{void tri\_insertion(int tab[], int n)}qui implémente l'algorithme de tri par insertion.  \verb|n| représente le nombre d'éléments à trier.
+
+Le tri par insertion consiste à prendre l'élément se trouvant juste après la partie 
+déjà triée du tableau et de trouver sa place dans cette dernière (insertion). Le premier élément 
+à insérer est le deuxième élément du tableau, le premier étant forcément déjà  trié puisqu'il 
+est tout seul. On recommence ce procédé jusqu'au dernier élément du tableau.
+\begin{solution}
+\begin{verbatim}
+void tri_insert(int tab[],int n) {
+  int p;
+  int j;
+  int k;
+  for (j=1;j<n;j++) {
+    p=tab[j];
+    k=j-1;
+    while(k>=0 && tab[k]>p)
+      {
+	tab[k+1]=tab[k];
+	k--;
+      }
+      tab[k+1]=p;
+
+  }
+}
+\end{verbatim}
+
+\end{solution}
+
+\exercice{(Duplication de tableaux)}
+Ecrire un programme C  \texttt{void copy\_tab(int tabin[], int tabout[], int n)} qui copie les \verb|n| premières
+valeurs
+du tableau \verb|tabin| dans le tableau \verb|tabout|.
+
+\exercice{(Comparaison des méthodes de tri implémentées)}
+
+
+
+On va ensuite exécuter chacun des algorithmes de tri sur un tableau et comparer le temps mis par chacun des algorithmes de tri précédents. 
+
+Pour donner une idée, on prendra un tableau de taille 50000 contenant des entiers entre 0 et 20000. On pourra ensuite faire varier la taille des tableaux pour voir l'évolution du temps pris par les algorithmes en fonction de la taille.
+
+On pourra alors tracer un graphique du temps en fonction de la taille N. Quelle courbe obtient-on ?
+
+Pour mesurer le temps (en secondes) d'exécution d'une séquence d'instruction, on utilise la bibliothèque \texttt{time.h}. On déclare une variable \texttt{p} de type \texttt{double} et deux variables \texttt{start} et \texttt{end} de type \texttt{clock\_t} :
+\begin{verbatim}
+double p;
+clock_t start, end ;
+\end{verbatim}
+ Au début et à la fin de la séquence d'instruction (ici séquence permettant de trier le tableau), on consulte l'horloge de l'ordinateur :
+\begin{verbatim}
+start=clock();
+//Début de la séquence d'instruction
+(...)
+//Fin de la séquence d'instruction
+end=clock();
+\end{verbatim}
+
+On calcule et affiche la différence en secondes :
+
+\begin{verbatim}
+p=(double) (end - start) / CLOCKS_PER_SEC ;
+printf("Le temps d'execution est : %lf secondes\n",p);
+\end{verbatim}
+
+\textbf{Attention :} Afin que l'estimation du temps de chaque tri soit significative, il convient de faire la moyenne sur plusieurs tris pour chacune des méthodes, et de trier toujours le même tableau lorsqu'on compare deux méthodes.
+
+\begin{solution}
+Voici, pour donner un ordre d'idée des temps des tris les uns par
+rapport aux autres, les résulats des tris sur un tableau de taille
+N=50000 contenant des entiers entre 1 et MAX=200000.
+
+Le temps d'execution de tri a bulle est : 10.170000 secondes
+
+Le temps d'execution de tri par selection est : 3.730000 secondes
+
+Le temps d'execution de tri par insertion est : 4.290000 secondes
+
+%Le temps d'execution du tri par shell est : 0.020000
+
+\end{solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \end{document}

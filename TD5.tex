@@ -1,4 +1,4 @@
-\documentclass[french,12pt,a4paper,twoside,openright,titlepage]{report}
+\documentclass[french,10pt,a4paper,twoside,openright,titlepage]{report}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage[latin1]{inputenc}
@@ -22,7 +22,7 @@
 \voffset-2cm
 \hoffset-1cm
 \headsep0.5cm
-\topmargin0.5cm
+\topmargin2.5cm
 \oddsidemargin0.5cm
 \evensidemargin0.5cm
 
@@ -105,6 +105,10 @@ $\displaystyle }l<{$\end{lrbox}%
 \let\endExamplebox\endexamplebox
 
 
+\widowpenalty 10000
+\clubpenalty 10000
+\raggedbottom
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -113,7 +117,14 @@ $\displaystyle }l<{$\end{lrbox}%
 \setboolean{sol}{false}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Change def \main for MAIN groupe
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\main{}
+
 \ifthenelse{\boolean{sol}}
 {
 \newenvironment{solution}
@@ -141,8 +152,12 @@ $\displaystyle }l<{$\end{lrbox}%
 
 
 \begin{document}
-
+\ifdefined\main
+\lhead[MAIN3]{MAIN3}
+\else
 \lhead[ROB3/MAIN3]{ROB3/MAIN3}
+\fi
+
 \chead[]{}
 \rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
  
@@ -170,14 +185,15 @@ $\displaystyle }l<{$\end{lrbox}%
 
 \chapter*{Présentation en groupe}
 
-L'objectif de ce travail est de présenter en groupe de 4 ou 5 un exposé de 15 min sur un des sujets listés ci-après.
+L'objectif de ce travail est de présenter en groupe
+un exposé de 15 min sur un des sujets listés ci-après.
 Les objectifs de ce travail sont les suivants :
 \begin{itemize}
 \item Savoir effectuer une recherche documentaire ;
 \item Savoir présenter des concepts et de nouvelles notions ;
 \item Appréhender des notions importantes autour de la programmation informatique.
 \end{itemize}
-Les présentations dureront 15 minutes et devront donner une idée claire de la notion abordée avec une approche \textbf{pratique}. La démonstration d'une notion autour d'\textbf{exemples concrets} est très fortement encouragée.
+Les présentations dureront 10 minutes (suivie de 5 minutes de questions)  et devront donner une idée claire de la notion abordée avec une approche \textbf{pratique}. La démonstration d'une notion autour d'\textbf{exemples concrets} est très fortement encouragée.
 
 \exercice{Une forge}
 Une forge est un système intégré permettant de développer un logiciel de façon collaborative, en offrant un certain nombre d'outils.
@@ -187,6 +203,22 @@ forges les plus populaires.
 
 Référence : 
 \href{https://fr.wikipedia.org/wiki/Forge_%28informatique%29}{page wikipedia sur les forges}
+
+\exercice{Dépassement de tampon (Buffer overflow)}
+Un programme peut être amené à écrire à l'extérieur de l'espace alloué. Cela occasionne un bug, mais le comportement du programme est imprévisible. Cette faille de sécurité peut même être utilisée de façon malveillante pour introduire des instructions pirates dans un programme.
+
+La présentation expliquera le principe du dépassement de tampon en donnant des exemples, et en proposant les solutions pour éviter ce problème.
+
+Référence
+\url{http://nicolasj.developpez.com/articles/pieges/}
+
+\exercice{Optimisation du code par le compilateur}
+Le compilateur gcc propose des options d'optimisation du code (\texttt{-g}), elles permettent à certains programmes de s'exécuter plus rapidement.
+
+La présentation présentera globalement les possibilités d'optimisation offertes par gcc. Il y a énormément d'optimisations possibles mais il sera intéressant de choisir un ou deux exemples, d'expliquer leur principe et de montrer leur fonctionnement sur un exemple.
+
+Référence
+\url{http://www.linuxjournal.com/article/7269}
 
 \exercice{Gestions de versions}
 Lors d'une phase de développement, en particulier collaborative, il est utile de garder une mémoire de toutes les modifications 
