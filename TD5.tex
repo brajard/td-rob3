@@ -1,4 +1,4 @@
-\documentclass[french,10pt,a4paper,twoside,openright,titlepage]{report}
+\documentclass[french,12pt,a4paper,twoside,openright,titlepage]{report}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage[latin1]{inputenc}
@@ -8,7 +8,6 @@
 \usepackage{babel}
 \usepackage{amsfonts}
 \usepackage{graphicx}
-\usepackage{hyperref}
 %\usepackage{here}
 \usepackage{ifthen}
 \usepackage{xcomment}
@@ -22,7 +21,7 @@
 \voffset-2cm
 \hoffset-1cm
 \headsep0.5cm
-\topmargin2.5cm
+\topmargin1.5cm
 \oddsidemargin0.5cm
 \evensidemargin0.5cm
 
@@ -31,8 +30,8 @@
 \makeatother
 \newlength{\mylength}
 \newcounter{exo}\stepcounter{exo}
-\newcommand\exercice[1]{
-\subsubsection*{Sujet \theexo\stepcounter{exo}: {#1}}
+\newcommand\exercice{
+\subsubsection*{Exercice \theexo\stepcounter{exo}}
 %{\bf Exercice \theexo\stepcounter{exo}\\}
 }
 
@@ -105,10 +104,6 @@ $\displaystyle }l<{$\end{lrbox}%
 \let\endExamplebox\endexamplebox
 
 
-\widowpenalty 10000
-\clubpenalty 10000
-\raggedbottom
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -117,14 +112,7 @@ $\displaystyle }l<{$\end{lrbox}%
 \setboolean{sol}{false}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Change def \main for MAIN groupe
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\def\main{}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%M
 \ifthenelse{\boolean{sol}}
 {
 \newenvironment{solution}
@@ -152,22 +140,18 @@ $\displaystyle }l<{$\end{lrbox}%
 
 
 \begin{document}
-\ifdefined\main
-\lhead[MAIN3]{MAIN3}
-\else
-\lhead[ROB3/MAIN3]{ROB3/MAIN3}
-\fi
 
+\lhead[ROB3/MAIN3]{ROB3/MAIN3}
 \chead[]{}
 \rhead[Informatique G\'en\'erale ]{Informatique G\'en\'erale}
  
 \ifthenelse{\boolean{sol}}
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version enseignants)]{Polytech'Paris-UPMC 2016-2017 (version enseignants)}
+\lfoot[Polytech'Paris-UPMC 2017-2018 (version enseignants)]{Polytech'Paris-UPMC 2017-2018 (version enseignants)}
 
 }
 {
-\lfoot[Polytech'Paris-UPMC 2016-2017 (version \'etudiants)]{Polytech'Paris-UPMC 2016-2017 (version \'etudiants)}
+\lfoot[Polytech'Paris-UPMC 2017-2018 (version \'etudiants)]{Polytech'Paris-UPMC 2017-2018 (version \'etudiants)}
 }
 
 \cfoot[]{}
@@ -183,106 +167,95 @@ $\displaystyle }l<{$\end{lrbox}%
  %\chapter{Conception d'algorithmes}
  %\addcontentsline{toc}{chapter}{S\'erie 1 : Conception d'algorithmes}
 
-\chapter*{Présentation en groupe}
+\chapter*{Travaux Dirigés n°5}
 
-L'objectif de ce travail est de présenter en groupe
-un exposé de 15 min sur un des sujets listés ci-après.
-Les objectifs de ce travail sont les suivants :
-\begin{itemize}
-\item Savoir effectuer une recherche documentaire ;
-\item Savoir présenter des concepts et de nouvelles notions ;
-\item Appréhender des notions importantes autour de la programmation informatique.
-\end{itemize}
-Les présentations dureront 10 minutes (suivie de 5 minutes de questions)  et devront donner une idée claire de la notion abordée avec une approche \textbf{pratique}. La démonstration d'une notion autour d'\textbf{exemples concrets} est très fortement encouragée.
+\exercice
+Le but de l'exercice est de proposer des fonctions permettant de manipuler des tableaux 2D mais qui seront représentés sous forme
+de tableaux 1D en mémoire. On dit qu'on "applatit" le tableau.
 
-\exercice{Une forge}
-Une forge est un système intégré permettant de développer un logiciel de façon collaborative, en offrant un certain nombre d'outils.
+Par exemple, le tableau :
+\begin{tabular}{|c|c|c|}
+\hline
+2 & 3 & 4 \\
+\hline
+5 & 6 & 7 \\
+\hline
+\end{tabular}
 
-Le but de cette présentation est d'expliquer les différentes fonctionnalités proposées par les forges, et d'indiquer les 
-forges les plus populaires.
+sera représenté en mémoire comme le tableau :
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+2 & 3 & 4 & 5 & 6 & 7 \\
+\hline
+\end{tabular}
 
-Référence : 
-\href{https://fr.wikipedia.org/wiki/Forge_%28informatique%29}{page wikipedia sur les forges}
-
-\exercice{Dépassement de tampon (Buffer overflow)}
-Un programme peut être amené à écrire à l'extérieur de l'espace alloué. Cela occasionne un bug, mais le comportement du programme est imprévisible. Cette faille de sécurité peut même être utilisée de façon malveillante pour introduire des instructions pirates dans un programme.
-
-La présentation expliquera le principe du dépassement de tampon en donnant des exemples, et en proposant les solutions pour éviter ce problème.
-
-Référence
-\url{http://nicolasj.developpez.com/articles/pieges/}
-
-\exercice{Optimisation du code par le compilateur}
-Le compilateur gcc propose des options d'optimisation du code (\texttt{-g}), elles permettent à certains programmes de s'exécuter plus rapidement.
-
-La présentation présentera globalement les possibilités d'optimisation offertes par gcc. Il y a énormément d'optimisations possibles mais il sera intéressant de choisir un ou deux exemples, d'expliquer leur principe et de montrer leur fonctionnement sur un exemple.
-
-Référence
-\url{http://www.linuxjournal.com/article/7269}
-
-\exercice{Gestions de versions}
-Lors d'une phase de développement, en particulier collaborative, il est utile de garder une mémoire de toutes les modifications 
-apportées à un code, mais aussi de pouvoir intégrer les modifications faites par un collaborateur.
-Pour cela, on utilise des gestionnaires de versions, dont les plus utilisés sont \verb|svn| et \verb|git|.
-
-La présentation se focalisera sur l'outil \verb|git| et en montrera le fonctionnement.
-
-Référence :
-\url{https://openclassrooms.com/courses/gerez-vos-codes-source-avec-git}
+\begin{enumerate}
+\item Ecrire une fonction \verb|init_tab| qui prend en entrée deux entiers représentant 
+le nombre \verb|nl| de lignes et  \verb|nc| de colonne et renvoie 
+un tableau de \verb|float| de taille \verb|nl|x\verb|nc| (le tableau étant représenté en mémoire
+comme un tableau 1D) dans lequel tous les éléments sont nuls. La fonction renvoie un élément de type pointeur sur \verb|float|
+\item Ecrire une fonction \verb|get_in_tab| qui prend (parmi d'autres entrées à déterminer) deux entiers représentant 
+les indices en ligne et colonne d'un tableau applati et renvoie la valeur correspondante dans le tableau.
+\item Ecrire une fonction \verb|set_in_tab| qui prend (parmi d'autres entrées à déterminer) un \verb|float| \verb|x| et deux entiers représentant 
+les indices en ligne et colonne d'un tableau applati et affecte \verb|x| à la valeur correspondante du tableau.
+\item Ecrire la fonction \verb|adjacency| qui prend (parmi d'autres entrées à déterminer) un tableau de \verb|float| \verb|Adj| de taille 4 et les indices \verb|i,j| en ligne et colonne d'un tableau applati et renvoie les valeurs des éléments adjacents à l'élément d'indice \verb|i,j|. On appelle élément adjacent, un élement situé à côté (au-dessus, au-dessous, à droite ou à gauche d'un élément de référence).
+On pourra proposer deux versions de cette fonction qui traitent différemment les cas où l'élément de référence est au bord du tableau (on pourra soit mettre 0, soit appliquer une condition de périodicité sur les lignes et les colonnes du tableau).
+\end{enumerate}
 
 
-\exercice{Automatiser le makefile}
-Ce sujet s'adresse aux étudiants ayant déjà abordé le \verb|Makefile|.
-Afin d'automatiser certaines tâches dépendantes (notamment la compilation d'un programme), on peut
-utiliser l'outil \verb|make| qui lit ses instructions à partir d'un fichier \verb|Makefile|.
-Ce fichier est souvent dépendant de l'environnement de développement (localisation des fichiers, des bibliothèques,
-option de compilation, etc.). Certains outils ont été développés pour rendre la compilation d'un code plus portable.
-Il s'agit notamment de l'outil \texttt{cmake}.
+\exercice 
+Le but de l'exercice est de proposer des fonctions pour manipuler des nombres complexes à travers l'ensemble de Mandelbrot.
+Soit un nombre complexe $c$ définissant un point du plan 
+(la partie réelle de $c$ représente l'abscisse, la partie imaginaire représente l'ordonnée).
+L'ensemble de Mandelbrot est une fractale définie comme l'ensemble des points $c$ 
+du plan complexe pour lesquels la suite de nombres complexes définie par récurrence par :
+\begin{equation}
+\left\{
+\begin{aligned}
+z_0 = 0\\
+z_{n+1} = z_n^2 + c
+\end{aligned}
+\right.
+\end{equation}
+est bornée.
 
-La présentation expliquera comment utiliser l'outil \texttt{cmake} de façon générale et autour d'un exemple.
+On peut notamment montrer que s'il existe $n$ tel que $|z_n|>2$, la suite est divergente. En pratique, on fixe un nombre maximum d'itération $n_{max}$ pour la suite $z_n$ et on considère que la suite est convergente si $|z_{n_{max}}|<=2$.
 
-Référence : \href{http://florian-goujeon.developpez.com/cours/cmake/initiation/}{http://florian-goujeon.developpez.com/cours/cmake/initiation/}
+\begin{figure}
+\centering
+\includegraphics[width=.7\textwidth]{./Ensemble_de_Mandelbrot.png}
+\caption{Ensemble de Mandelbrot (point noirs)}
+\end{figure}
 
-\exercice{Documentation automatique}
-Un code seul est souvent inutile. Il faut l'accompagner d'une documentation qui détaille les différentes 
-fonctionnalités du programme. On peut rédiger la documentation indépendemment du code, mais il est souvent
-utile d'utiliser des générateurs de documentation comme \verb|Doxygen|.
+On représentera un nombre complexe comme
+deux nombres flottants représentant la partie entière et la partie imaginaire.
 
-La présentation devra expliquer les principes de la documentation automatique et montrer un exemple de documentation
-généré par \verb|Doxygen|
+\begin{enumerate}
+\item Ecrire une fonction
 
-Référence : \href{http://florian-goujeon.developpez.com/cours/cmake/initiation/}{http://florian-goujeon.developpez.com/cours/cmake/initiation/}
+\verb|add(float ar,float ai,float br,float bi, float *p_cr,float *p_ci)|
+qui prend deux nombres complexes $a$ et $b$
+(avec $a = ar + i.ai$) 
+et renvoie le nombre $c=a + b$
+(le nombre $c = cr + i.ci$ est modifié par passage par adresse).
 
+\item Ecrire une fonction
+ 
+\verb|mult(float ar,float ai,float br,float bi, float *p_cr,float *p_ci)|
+qui prend deux nombres complexes $a$ et $b$
+(avec $a = ar + i.ai$) 
+et renvoie le nombre $c=a\times b$
+(le nombre $c = cr + i.ci$ est modifié par passage par adresse).
+\item Ecrire une fonction \verb|module| qui prend en entrée un nombre complexe et renvoie son module
+\item Ecrire une fonction \verb|mandelbrot| qui prend en entrée un nombre complexe $c$, un nombre maximum d'itération et renvoie le nombre maximum $n$ d'itération
+de la suite de Mandelbrot tel que $|z_n|<=2$
+\item On peut reprendre les fonctions ci-dessus en définissant un type \verb|Complexe| composé du champ \verb|real| et \verb|imag|. Les prototypes des fonctions sont alors :
+\begin{enumerate}
+\item \verb|Complexe add(Complexe a,Complexe b)|
+\item \verb|Complexe mult(Complex a,Complexe b)|
+\item \verb|float module(Complexe a)|
+\item \verb|int mandelbrot(Complexe c, int nmax)|
+\end{enumerate}
+\end{enumerate}
 
-\exercice{profileurs}
-Parfois, pour des raisons d'optimisation ou pour évaluer les performances d'un code à l'exécution,
-on utilise le \og profilage de code \fg{}, dont un exemple est le logiciel \verb|gprof|.
-La présentation pourra rappeler les principes du profilage et en montrer le résutat sur un exemple bien adapté.
-
-Référence : \href{https://fr.wikipedia.org/wiki/Gprof}{page wikipedia de gprof}
-
-\exercice{Fuite mémoire}
-Avec l'allocation dynamique de mémoire, on peut voir apparaître des phénomènes de fuite de mémoire,
-souvent dus à l'oubli de désallouer de la mémoire allouée dynamiquement (avec \verb|malloc| par exemple).
-Il serait intéressant d'expliquer ce phénomène, d'en montrer un exemple, et d'introduire l'utilisation d'outils
-(comme \verb|valgrind|) qui permettent de détecter ce type d'erreur.
-
-Référence :  \href{https://fr.wikipedia.org/wiki/Fuite_de_m%C3%A9moire}{page wikipedia de Fuite de mémoire}
-
-\exercice{Gestion de la mémoire}
-On a résumé un programme informatique comme : du traitement + de la mémoire + des communications.
-L'utilisation de la mémoire, en pratique, est souvent complexe, utilisant plusieurs \og régions \fg{} mémoires qui ont 
-des utilisations et des règles de fonctionnements différents.
-
-Là encore, des exemples concrets seront encouragés. L'article en référence est long, il faudra sûrement sélectionner
-certains points particuliers à développer.
-
-Référence : \href{http://ilay.org/yann/articles/mem/}{http://ilay.org/yann/articles/mem/}
-
-\exercice{Cycle de développement logiciel}
-Construire un gros logiciel informatique demande un travail lourd et souvent très collaboratif. Le développement d'un logiciel nécessite une organisation efficace. Plusieurs types d'organisations sont proposés et sont appliqués en pratique dans l'industrie, on les appelle des \textbf{cycles de développement logiciel}. La page wikipédia résume les principaux cycles utilisés.
-
-La présentation pourra résumer les grands principes des différents cycles et pourra détailler plus précisémment l'un d'eux autour d'un exemple pratique d'application.
-
-Référence : \href{https://fr.wikipedia.org/wiki/Cycle_de_d%C3%A9veloppement_%28logiciel%29}{page wikipedia de Développement logiciel}
 \end{document}

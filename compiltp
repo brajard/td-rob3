@@ -4,14 +4,12 @@ TEXNAME=$1.tex
 
 #compilation version etudiante
 LC_CTYPE=C && LANG=C && sed '/setboolean{sol}/ s/true/false/' $TEXNAME > etudiant.tex
-latex etudiant.tex
-latex etudiant.tex
-dvips etudiant.dvi -o etudiant.ps
-ps2pdf etudiant.ps $1_etu.pdf
+pdflatex etudiant.tex
+pdflatex etudiant.tex
+mv etudiant.pdf $1_etu.pdf
 
 #compilation version enseignant
 sed '/setboolean{sol}/ s/false/true/' $TEXNAME > enseignant.tex
-latex enseignant.tex
-latex etudiant.tex
-dvips enseignant.dvi -o enseignant.ps
-ps2pdf enseignant.ps $1_ens.pdf
+pdflatex enseignant.tex
+pdflatex enseignant.tex
+mv enseignant.pdf $1_ens.pdf
